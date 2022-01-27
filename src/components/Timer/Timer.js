@@ -24,20 +24,32 @@ function Timer( {
     const convertedTime = convertSecondsToTimeValueForDigits( secToDisplay );
 
     const [ state, setState ] = useState( status );
+
     const [ valueHoursDecades, setValueHoursDecades ] = useState( convertedTime.hoursDecades );
     const [ valueHoursUnits, setValueHoursUnits ] = useState( convertedTime.hoursUnits );
     const [ valueMinutesDecades, setValueMinutesDecades ] = useState( convertedTime.minutesDecades );
     const [ valueMinutesUnits, setValueMinutesUnits ] = useState( convertedTime.minutesUnits );
     const [ valueSecondsDecades, setValueSecondsDecades ] = useState( convertedTime.secondsDecades );
     const [ valueSecondsUnits, setValueSecondsUnits ] = useState( convertedTime.secondsUnits );
+
+    const [ milsecWhenStart, setMilsecWhenStart ] = useState( msecWhenStart );
+    const [ initialTimeCountdown, setInitialTimeCountdown ] = useState( timeBeginningCountdown );
+
     const [ animationTimeIsOut, setAnimationTimeIsOut ] = useState( animTimeIsOut );
     const [ animationSetValue, setAnimationSetValue ] = useState( false );
     const [ milsecAnimStart, setMilsecAnimStart ] = useState( msecWhenAnimStart );
-    const [ milsecWhenStart, setMilsecWhenStart ] = useState( msecWhenStart );
     const [ animLeft, setAnimLeft ] = useState( timeAnimationLeft );
-    const [ initialTimeCountdown, setInitialTimeCountdown ] = useState( timeBeginningCountdown );
     const [ appearanceTitleIncreaseValue, setAppearanceTitleIncreaseValue ] = useState( "none" );
     const [ appearanceTitleDecreaseValue, setAppearanceTitleDecreaseValue ] = useState( "none" );
+        
+    let tim = {
+        "время на дисплее": [ state, valueHoursDecades, valueHoursUnits, "__", valueMinutesDecades, valueMinutesUnits, "__", valueSecondsDecades, valueSecondsUnits],
+        "UNIX на старте": milsecWhenStart,
+        "время начала остчета": initialTimeCountdown,
+        "анимация время истекло отсалось":  [ animLeft, animationTimeIsOut ],
+        "анимация задайте время": animationSetValue,
+    }
+    localStorage.setItem( `tim`, JSON.stringify( tim ) );
 
     useEffect( () => {
         setCreatedItems( ( previousState ) => {
@@ -154,12 +166,16 @@ function Timer( {
                         setValueSecondsUnits( () => convertedTime.secondsUnits );
                     } else {
                         setState( () => "finished" );
+
                         setValueHoursDecades( () => 0 );
                         setValueHoursUnits( () => 0 );
                         setValueMinutesDecades( () => 0 );
                         setValueMinutesUnits( () => 0 );
                         setValueSecondsDecades( () => 0 );
                         setValueSecondsUnits( () => 0 );
+
+                        setInitialTimeCountdown( () => 0 );
+
                         setAnimationTimeIsOut( () => true );
                         setMilsecAnimStart( () => 0 );
                         setMilsecWhenStart( () => 0 );
@@ -184,6 +200,7 @@ function Timer( {
             setAnimLeft( () => 0 );
             setMilsecAnimStart( () => 0 )
             setMilsecWhenStart( () => 0 );
+            setInitialTimeCountdown( () => 0 );
         }
     }, [ state ] );
         
@@ -193,6 +210,7 @@ function Timer( {
             setAnimLeft( () => 0 );
             setMilsecAnimStart( () => 0 );
             setMilsecWhenStart( () => 0 );
+            setInitialTimeCountdown( () => 0 );
         }
     }, [ state ] );
 
@@ -230,6 +248,7 @@ function Timer( {
     }
 
     function reset(){
+        time = convertTimeFromScoreboardToSeconds( 0 );
         setState( () => "reseted" );
     }
 

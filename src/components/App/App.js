@@ -43,8 +43,6 @@ function App() {
         return () => document.removeEventListener( "visibilitychange", writeLocalStorage );
     }, [ appState ] );
 
-    
-
     function closeAllItems(){
         setBbuttonCloseAppearance( () => false );
         setCreatedItems( () => [] );
