@@ -1,0 +1,37 @@
+.animation-for-control-buttons {
+    animation-name: press-button;
+    animation-duration: 250ms;
+}
+@keyframes press-button {
+    0% {
+        width: 13px;
+    }
+    50% {
+        width: 7px;
+    }
+    100% {
+        width: 13px;
+    }
+}
+@-webkit-keyframes press-button {
+    0% {
+        width: 13px;
+    }
+    50% {
+        width: 8px;
+    }
+    100% {
+        width: 13px;
+    }
+}
+@-moz-keyframes press-button {
+    0% {
+        width: 13px;
+    }
+    50% {
+        width: 8px;
+    }
+    100% {
+        width: 13px;
+    }
+}

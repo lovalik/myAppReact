@@ -1,0 +1,236 @@
+.digitalwatch__LCDdisplay_wrapper {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(102, 99, 99);
+    font-family: 'Digital', "Arial Narrow", sans-serif;
+    color: black;
+    font-size: 0;
+    text-shadow: 2px 2px 1px rgb(85, 85, 85);
+    border-radius: 16px;
+}
+.digitalwatch__LCDdisplay_wrapper::before{
+    display: inline-block;
+    vertical-align: middle;
+    content:"";
+    height: 100%;
+    font-size: 0;
+}
+.digitalwatch__LCDdisplay-top-part_wrapper {
+    position: absolute;
+    top: 0;
+    height: 26%;
+    width: 100%;
+    font-size: 0;
+}
+.digitalwatch__LCDdisplay-top-part-format12-24_wrapper {
+    position:absolute;
+    top: 15px;
+    left: 14px;
+    z-index: 100;
+    background-color: rgb(102, 99, 99);
+    width: 32px;
+    height: 32px;
+    text-align: right;
+    font-size: 0;
+}
+.digitalwatch__LCDdisplay-format-number {
+    font-size: 18px;
+}
+.digitalwatch__LCDdisplay-format-letter {
+    font-size: 18px;
+}
+.digitalwatch__LCDdisplay-top-part-currentdate_wrapper {
+    position: absolute;
+    top: 9px;
+    right: 5px;
+    width: 55%;
+    height: 70%;
+    text-align: right;
+    font-size: 0;
+}
+.digitalwatch__LCDdisplay-top-part_dayofweek,
+.digitalwatch__LCDdisplay-top-part_date,
+.digitalwatch__LCDdisplay-top-part_month  {
+    text-transform: uppercase;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: baseline;
+    font-size: 18px;
+    height: 100%;
+}
+.digitalwatch__LCDdisplay-top-part_month{
+    padding-right: 5px;
+    text-align: right;
+    width: 45px;
+}
+.digitalwatch__LCDdisplay-top-part_dayofweek{
+    padding-left: 5px;
+    text-align: left;
+    width: 37px;
+}
+.digitalwatch__LCDdisplay-top-part_date {
+    width: 30px;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* CURRENT TIME */
+.digitalwatch__LCDdisplay-middle-part_wrapper {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    width: 100%;
+    font-size: 0;
+    text-align: center;
+}
+.digitalwatch__LCDdisplay-middle-part_wrapper::before {
+    display: inline-block;
+    vertical-align: middle;
+    content:"";
+    height: 100%;
+    font-size: 0;
+}
+.digitalwatch__LCDdisplay-middle-part_prefix {
+    position: absolute;
+    bottom: 54px;
+    left: 0;
+    width: 45px;
+    font-size: 32px;
+    text-align: center;
+}
+.digitalwatch__LCDdisplay-middle-part_hours_decades,
+.digitalwatch__LCDdisplay-middle-part_hours_units,
+.digitalwatch__LCDdisplay-middle-part_minutes_decades,
+.digitalwatch__LCDdisplay-middle-part_minutes_units  {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 60px;
+    text-align: right;
+    width: 34px;
+}
+.digitalwatch__LCDdisplay-middle-part_colon {
+    display: inline-block;
+    padding-bottom: 15px;
+    vertical-align: middle;
+    width: 10px;
+    font-size: 60px;
+    text-align: center;
+}
+.digitalwatch__LCDdisplay-middle-part_seconds_decades,
+.digitalwatch__LCDdisplay-middle-part_seconds_units {
+    position: absolute;
+    top: 54px;
+    width: 18px;
+    font-size: 32px;
+    text-align: right;
+}
+.digitalwatch__LCDdisplay-middle-part_seconds_decades {
+    right: 24px;
+}
+.digitalwatch__LCDdisplay-middle-part_seconds_units {
+    right: 5px;
+}
+
+/* BOTTOM PART LCD DISPLAY///////////////////////// */
+.digitalwatch__LCDdisplay-bottom-part_wrapper{
+    position: absolute;
+    width: 100%;
+    height: 15%;
+    bottom: 0;
+    font-size: 0;
+}
+.digitalwatch__LCDdisplay-bottom-part_wrapper > * {
+    font-size: 18px;
+}
+.digitalwatch__LCDdisplay-bottom-part_city {
+    margin-left: 5px;
+}
+
+.digitalwatch__dropdown-list_wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    text-align: center;
+    background-color: rgb(185, 185, 185);
+    border-radius: 21px;
+}
+.digitalwatch__dropdown-list_wrapper::before {
+    display: inline-block;
+    vertical-align: middle;
+    content:"";
+    font-size: 0;
+    height: 100%;
+}
+.digitalwatch__list-cities-for-time-zones_wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    height: 280px;
+    width: 240px;
+    text-align: center;
+    background-color: rgb(102, 99, 99);
+    border: solid 2px rgb(51, 51, 51);
+    border-radius: 8px;
+}
+.digitalwatch__list-cities-for-time-zones_wrapper::before{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    font-size: 0;
+    content: "";
+}
+.digitalwatch__list-cities-for-time-zones_overflow {
+    display: inline-block;
+    vertical-align: middle;
+    height: 97%;
+    width: 97%;
+    overflow: auto;
+    text-align: center;
+}
+.digitalwatch__list-cities-for-time-zones_overflow::-webkit-scrollbar{
+    box-sizing: border-box;
+    width: 8px;
+    background-color: black;
+    border-radius: 4px;
+}
+.digitalwatch__list-cities-for-time-zones_overflow::-webkit-scrollbar-thumb {
+    box-sizing: border-box;
+    border: solid 1px rgb(51, 51, 51);
+    background-color: rgb(185, 185, 185);
+    border-radius: 4px;
+}
+.digitalwatch__list-cities-for-time-zones_overflow::-webkit-scrollbar-button{
+    box-sizing: border-box;
+    height: 8px;
+    background-color: rgb(185, 185, 185);
+    border: solid 1px rgb(51, 51, 51);
+    border-radius: 4px;
+}
+.digitalwatch__list-cities-for-time-zones {
+    width: 99%;
+    height: 100%;
+    border-collapse: collapse;
+    font-family: 'Days', "Arial", "Helvetica", sans-serif;
+    font-size: 12px;
+    line-height: 2;
+}
+.digitalwatch__city {
+    text-align: left;
+    text-transform: uppercase;
+    padding-left: 3px;
+}
+.digitalwatch__valueUTC {
+    text-align: right;
+}
+.digitalwatch__null-null {
+    text-align: left;
+}
+.digitalwatch__list-cities-for-time-zones tr:hover {
+    cursor:pointer;
+}

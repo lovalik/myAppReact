@@ -1,0 +1,363 @@
+/* ANIMATION EXECUTES WHEN USER NOT SET TIME VALUE */
+
+    /* FOR DIGITS */
+.timer__animation-when-user-not-set-value_for-digits {
+    animation-name: animation-when-user-not-set-value_for-digits;
+    animation-duration: 175ms;
+    animation-iteration-count: 4;
+}
+@keyframes animation-when-user-not-set-value_for-digits {
+
+    0% {
+        color:red;
+    }
+    50% {
+        color:inherit;
+    }
+    100% {
+        color:red;
+    }
+
+}
+@-webkit-keyframes animation-when-user-not-set-value_for-digits {
+
+    0% {
+        color:red;
+    }
+    50% {
+        color:inherit;
+    }
+    100% {
+        color:red;
+    }
+
+}
+@-moz-keyframes animation-when-user-not-set-value_for-digits {
+
+    0% {
+        color:red;
+    }
+    50% {
+        color:inherit;
+    }
+    100% {
+        color:red;
+    }
+
+}
+
+    /* FOR BUTTONS */
+.timer__animation-when-user-not-set-value_for-buttons {
+    animation-name: animation-when-user-not-set-value_for-buttons;
+    animation-duration: 175ms;
+    animation-iteration-count: 4;
+}
+@keyframes animation-when-user-not-set-value_for-buttons {
+    0%{
+        transform: rotate(0deg);
+        background-color: red;
+    }
+    25%{
+        transform: rotate(15deg);
+    }
+    50%{
+        transform: rotate(0deg);
+        background-color: red;
+    }
+    75%{
+        transform: rotate(-15deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+@-moz-keyframes animation-when-user-not-set-value_for-buttons {
+    0%{
+        transform: rotate(0deg);
+        background-color: red;
+    }
+    25%{
+        transform: rotate(15deg);
+    }
+    50%{
+        transform: rotate(0deg);
+        background-color: red;
+    }
+    75%{
+        transform: rotate(-15deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+@-webkit-keyframes animation-when-user-not-set-value_for-buttons {
+    0%{
+        transform: rotate(0deg);
+        background-color: red;
+    }
+    25%{
+        transform: rotate(15deg);
+    }
+    50%{
+        transform: rotate(0deg);
+        background-color: red;
+    }
+    75%{
+        transform: rotate(-15deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+
+    /* FOR TITLE */
+.timer__animation-when-user-not-set-value_for-title {
+    animation-name: animation-when-user-not-set-value_for-title;
+    animation-delay: 700ms;
+    animation-duration: 700ms;
+    animation-iteration-count: 3;
+}
+@keyframes animation-when-user-not-set-value_for-title {
+    
+    0% {
+        font-size: 24px;
+        font-weight: bold;
+        color:red;
+    }
+    49.999% {
+        color:red;
+    }
+    50% {
+        color: black;
+    }
+    99.999% {
+        color: black;
+    }
+    100% {
+        font-size: 24px;
+        font-weight: bold;
+        color:red;
+    }
+
+}
+@-webkit-keyframes animation-when-user-not-set-value_for-title {
+    
+    0% {
+        font-size: 24px;
+        font-weight: bold;
+        color:red;
+    }
+    49.999% {
+        color:red;
+    }
+    50% {
+        color: black;
+    }
+    99.999% {
+        color: black;
+    }
+    100% {
+        font-size: 24px;
+        font-weight: bold;
+        color:red;
+    }
+
+}
+@-moz-keyframes animation-when-user-not-set-value_for-title {
+    
+    0% {
+        font-size: 24px;
+        font-weight: bold;
+        color:red;
+    }
+    49.999% {
+        color:red;
+    }
+    50% {
+        color: black;
+    }
+    99.999% {
+        color: black;
+    }
+    100% {
+        font-size: 24px;
+        font-weight: bold;
+        color:red;
+    }
+
+}
+
+
+/* ANIMATION EXECUTES WHEN TIME IS OUT */
+.timer__animation-when-time-is-out-for-digits {
+    animation-name: animation-when-time-is-out-for-digits;
+    animation-duration: 1000ms;
+    animation-iteration-count: 60;
+}
+@keyframes animation-when-time-is-out-for-digits {
+
+    0% {
+        color:red;
+    }
+    49.999% {
+        color:red;
+    }
+    50% {
+        color: black;
+    }
+    99.999% {
+        color: black;
+    }
+    100% {
+        color:red;
+    }
+
+}
+@-webkit-keyframes animation-when-time-is-out-for-digits {
+
+    0% {
+        color:red;
+    }
+    49.999% {
+        color:red;
+    }
+    50% {
+        color: black;
+    }
+    99.999% {
+        color: black;
+    }
+    100% {
+        color:red;
+    }
+
+}
+@-moz-keyframes animation-when-time-is-out-for-digits {
+
+    0% {
+        color:red;
+    }
+    49.999% {
+        color:red;
+    }
+    50% {
+        color: black;
+    }
+    99.999% {
+        color: black;
+    }
+    100% {
+        color:red;
+    }
+
+}
+.timer__animation-when-time-is-out-for-title {
+    animation-name: animation-when-time-is-out-for-title;
+    animation-duration: 1000ms;
+    animation-iteration-count: 60;
+}
+@keyframes animation-when-time-is-out-for-title {
+
+    0% {
+        font-size: 24px;
+        font-weight: bold;
+        color:red;
+    }
+    49.999% {
+        color:red;
+    }
+    50% {
+        color: black;
+    }
+    99.999% {
+        color: black;
+    }
+    100% {
+        font-size: 24px;
+        font-weight: bold;
+        color:red;
+    }
+
+}
+@-moz-keyframes animation-when-time-is-out-for-title {
+    0% {
+        font-size: 24px;
+        font-weight: bold;
+        color:red;
+    }
+    49.999% {
+        color:red;
+    }
+    50% {
+        color: black;
+    }
+    99.999% {
+        color: black;
+    }
+    100% {
+        font-size: 24px;
+        font-weight: bold;
+        color:red;
+    }
+
+}
+@-webkit-keyframes animation-when-time-is-out-for-title {
+    0% {
+        font-size: 24px;
+        font-weight: bold;
+        color:red;
+    }
+    49.999% {
+        color:red;
+    }
+    50% {
+        color: black;
+    }
+    99.999% {
+        color: black;
+    }
+    100% {
+        font-size: 24px;
+        font-weight: bold;
+        color:red;
+    }
+}
+
+/* ANIMATION FOR BUTTONS START-PAUSE-RESET-CLOSE */
+.timer__animation-for-button-press {
+    animation-name: press-button;
+    animation-duration: 0.3s;
+}
+@keyframes press-button {
+    0% {
+        width: 14px;
+    }
+    50% {
+        width: 10px;
+    }
+    100% {
+        width: 14px;
+    }
+}
+@-moz-keyframes press-button {
+    0% {
+        width: 14px;
+    }
+    50% {
+        width: 10px;
+    }
+    100% {
+        width: 14px;
+    }
+}
+@-webkit-keyframes press-button {
+    0% {
+        width: 14px;
+    }
+    50% {
+        width: 10px;
+    }
+    100% {
+        width: 14px;
+    }
+}

@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Digital';
+    src: url( "../fonts/digital/digitalicg.ttf")format('truetype'); 
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Days';
+    src: url( "../fonts/days/Days.otf")format('opentype'); 
+    font-style: normal;
+    font-weight: 400;
+}

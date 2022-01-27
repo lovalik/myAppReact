@@ -1,0 +1,189 @@
+@import url( "animation.css" );
+
+.timer__LCDdisplay_wrapper {
+    position:relative;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(102, 99, 99);
+    font-family: "Digital", "Arial Black", sans-serif;
+    color: black;
+    font-size: 0;
+    text-shadow: 2px 2px 1px rgb(85, 85, 85);
+    border-radius: 16px;
+}
+.timer__LCDdisplay_wrapper::before {
+    display: inline-block;
+    vertical-align: middle;
+    content:"";
+    height: 100%;
+    font-size: 0;
+}
+.timer-popup-title-increase-value,
+.timer-popup-title-decrease-value{
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: 20%;
+    left: 0;
+    text-align: center;
+    font-family: "Digital", "Arial Narrow", sans-serif;
+    font-size: 20px;
+    color: red;
+    font-weight: bold;
+}
+.timer-popup-title-increase-value{
+    top: 16px;
+}
+.timer-popup-title-decrease-value{
+    bottom: 16px;
+}
+.timer-popup-title-increase-value::before,
+.timer-popup-title-decrease-value::before{
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    content:"";
+    font-size: 0;
+}
+.timer__title-for-animation-when-time-is-out,
+.timer__title-for-animation-when-user-not-set-time{
+    box-sizing: border-box;
+    position: absolute;
+    top: 8px;
+    width: 100%;
+    height: 30%;
+    z-index: 10000;
+    text-align: center;
+}
+.timer__title-for-animation-when-time-is-out::before,
+.timer__title-for-animation-when-user-not-set-time::before  {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    content:"";
+    font-size: 0;
+}
+.timer__LCDdisplay_digit-with-button, .timer__LCDdisplay_colon {
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    box-sizing: border-box;
+    font-size: 60px;
+}
+.timer__LCDdisplay_digit-with-button{
+    text-align: right;
+    width: 35px;
+}
+.timer__LCDdisplay_colon {
+    text-align: center;
+    padding-bottom: 14px;
+    width: 10px;
+}
+/*SETTING VALUE BUTTONS*/
+.timer__button-increase-value_wrapper,
+.timer__button-decrease-value_wrapper {
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: 24px;
+    font-size: 0;
+    text-align: center;
+}
+.timer__button-increase-value_wrapper {
+    top: -88%;
+}
+.timer__button-decrease-value_wrapper {
+    bottom: -88%;
+}
+.timer__button-increase-value_wrapper::before,
+.timer__button-decrease-value_wrapper::before {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    content:"";
+}
+.timer__button-increase-value-decades,
+.timer__button-decrease-value-decades,
+.timer__button-increase-value-units,
+.timer__button-decrease-value-units {
+    position: relative;
+    box-sizing: border-box;
+    vertical-align: middle;
+    width: 30px;
+    height: 19px;
+    border: solid 2px rgb(51, 51, 51);
+    cursor: pointer;
+    background-color: transparent;
+}
+.timer__button-increase-value-decades {
+    border-top-left-radius: 21px 16px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 8px;
+}
+.timer__button-decrease-value-decades {
+    border-bottom-left-radius: 21px 16px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 8px;
+}
+.timer__button-increase-value-units {
+    border-top-right-radius: 21px 16px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 8px;
+}
+.timer__button-decrease-value-units {
+    border-bottom-right-radius: 21px 16px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 8px;
+}
+.timer__button-increase-value-decades::before,
+.timer__button-decrease-value-decades::before,
+.timer__button-increase-value-units::before,
+.timer__button-decrease-value-units::before {
+    position:absolute;
+    font-size: 18px;
+    color:rgb(51, 51, 51);
+}
+.timer__button-increase-value-decades::before,
+.timer__button-increase-value-units::before{
+    content: "+";
+}
+.timer__button-decrease-value-decades::before,
+.timer__button-decrease-value-units::before{
+    content: "-";
+    height: 70%;
+}
+.timer__button-increase-value-decades::before {
+    top: -3px;
+    left: 35%;
+}
+.timer__button-increase-value-units::before{
+    top: -3px;
+    right: 35%;
+}
+.timer__button-decrease-value-decades::before {
+    top: -5px;
+    right: 35%;
+}
+.timer__button-decrease-value-units::before{
+    top: -5px;
+    left: 35%;
+}
+.timer__button-increase-value-decades:hover,
+.timer__button-decrease-value-decades:hover,
+.timer__button-increase-value-units:hover,
+.timer__button-decrease-value-units:hover {
+    border-color: red;
+}
+.timer__button-increase-value-decades:hover::before,
+.timer__button-decrease-value-decades:hover::before,
+.timer__button-increase-value-units:hover::before,
+.timer__button-decrease-value-units:hover::before {
+    color: red;
+}
