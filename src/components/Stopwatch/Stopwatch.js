@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ItemCase from "../ItemCase";
+import { ItemCase } from "../ItemCase";
 import LcdDisplay from "./LcdDisplay";
 import dictionary from "./dictionary";
 import convertMillisecToTimeValue from "./utilities"

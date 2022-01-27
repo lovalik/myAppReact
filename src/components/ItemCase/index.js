@@ -1,1 +1,1 @@
-export { default } from "./ItemCase";
+export { default as ItemCase} from "./ItemCase";

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import engine from "./engine";
 
 function BlockDigitAndSetTimeButton( {
@@ -16,14 +16,19 @@ function BlockDigitAndSetTimeButton( {
 
     const methodsEngine = engine();
 
-    let styleDigit;
+    const [ color, setColor ] = useState( "black" );
+
+    let classNameDigit;
+    let styleDigit = {
+        color: color
+    }
 
     if ( animTimeIsOut ){
-        styleDigit = "timer__animation-when-time-is-out-for-digits";
+        classNameDigit = "timer__animation-when-time-is-out-for-digits";
     } else if ( animSetValue ){
-        styleDigit = "timer__animation-when-user-not-set-value_for-digits";
+        classNameDigit = "timer__animation-when-user-not-set-value_for-digits";
     } else {
-        styleDigit = "";
+        classNameDigit = "";
     }
 
     let classNameButtonIncrease;
@@ -41,26 +46,30 @@ function BlockDigitAndSetTimeButton( {
     }
     
     
-
     function unhidePopupTitleIncreaseValue(){
-        if( !animSetValue ){
-            setAppearanceTitleIncreaseValue( () => "block" );
-        } else if ( state === "finished" ) {
+        if( animSetValue || state === "finished" ){
             setAppearanceTitleIncreaseValue( () => "none" );
+            setColor( () => "black" );
+        } else {
+            setAppearanceTitleIncreaseValue( () => "block" );
+            setColor( () => "red" );
         }
     }
 
     function unhidePopupTitleDecreaseValue(){
-        if( !animSetValue ){
-            setAppearanceTitleDecreaseValue( () => "block" );
-        } else if ( state === "finished" ) {
+        if( animSetValue || state === "finished" ){
             setAppearanceTitleDecreaseValue( () => "none" );
+            setColor( () => "black" );
+        } else {
+            setAppearanceTitleDecreaseValue( () => "block" );
+            setColor( () => "red" );
         }
     }
 
     function hidePopupTitle(){
         setAppearanceTitleIncreaseValue( () => "none" );
         setAppearanceTitleDecreaseValue( () => "none" );
+        setColor( () => "black" );
     }
 
     function increaseValue(){
@@ -74,7 +83,7 @@ function BlockDigitAndSetTimeButton( {
     }
 
     return <div className="timer__LCDdisplay_digit-with-button">
-                <div className={ styleDigit } >
+                <div className={ classNameDigit } style={ styleDigit }>
                     { value }
                 </div>
                 <div className={ `timer__button-increase-value_wrapper` } >

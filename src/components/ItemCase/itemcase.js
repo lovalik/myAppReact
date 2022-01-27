@@ -42,4 +42,4 @@ function ItemCase( {
             </div>
 }
 
-export default ItemCase ;
+export default ItemCase;
