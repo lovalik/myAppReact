@@ -41,15 +41,6 @@ function Timer( {
     const [ animLeft, setAnimLeft ] = useState( timeAnimationLeft );
     const [ appearanceTitleIncreaseValue, setAppearanceTitleIncreaseValue ] = useState( "none" );
     const [ appearanceTitleDecreaseValue, setAppearanceTitleDecreaseValue ] = useState( "none" );
-        
-    let tim = {
-        "время на дисплее": [ state, valueHoursDecades, valueHoursUnits, "__", valueMinutesDecades, valueMinutesUnits, "__", valueSecondsDecades, valueSecondsUnits],
-        "UNIX на старте": milsecWhenStart,
-        "время начала остчета": initialTimeCountdown,
-        "анимация время истекло отсалось":  [ animLeft, animationTimeIsOut ],
-        "анимация задайте время": animationSetValue,
-    }
-    localStorage.setItem( `tim`, JSON.stringify( tim ) );
 
     useEffect( () => {
         setCreatedItems( ( previousState ) => {
