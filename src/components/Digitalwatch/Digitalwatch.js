@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ItemCase } from "../ItemCase";
-import LcdDisplay from "./LcdDisplay";
 import DropdownListOfCities from "./DropdownListOfCities";
 import "./styles.css";
 import dictionary from "./dictionary";
-import convertDate from "./utilities";
+import convertDate from "./convertDate";
 
 function Digitalwatch( {
             id,
@@ -96,7 +95,64 @@ function Digitalwatch( {
         onCloseItem( id );
     }
 
-    let lcdDisplay = < LcdDisplay time={ currentTime } />;
+    let lcdDisplay = <div className="digitalwatch__LCDdisplay_wrapper">
+                        <div className="digitalwatch__LCDdisplay-top-part_wrapper">
+                            <div className="digitalwatch__LCDdisplay-top-part-format12-24_wrapper">
+                                <span className="digitalwatch__LCDdisplay-format-number">
+                                    { currentTime.timeFormat }
+                                </span>
+                                <span className="digitalwatch__LCDdisplay-format-letter">
+                                    { currentTime.letter }</span>
+                            </div>
+                            <div className="digitalwatch__LCDdisplay-top-part-currentdate_wrapper">
+                                <span className="digitalwatch__LCDdisplay-top-part_month">
+                                    { currentTime.month }</span>
+                                <span className="digitalwatch__LCDdisplay-top-part_date">
+                                    { currentTime.date }</span>
+                                <span className="digitalwatch__LCDdisplay-top-part_dayofweek">
+                                    { currentTime.dayOfWeek }
+                                    </span>
+                        </div> 
+                        </div>
+                        <div className="digitalwatch__LCDdisplay-middle-part_wrapper">
+                            <span className="digitalwatch__LCDdisplay-middle-part_prefix">
+                                { currentTime.prefix_AM_PM }
+                            </span>
+                            <span className="digitalwatch__LCDdisplay-middle-part_hours_decades">
+                                { currentTime.hoursDecades }
+                            </span>
+                            <span className="digitalwatch__LCDdisplay-middle-part_hours_units">
+                                { currentTime.hoursUnits }
+                            </span>
+                            <span className="digitalwatch__LCDdisplay-middle-part_colon">:</span>
+                            <span className="digitalwatch__LCDdisplay-middle-part_minutes_decades">
+                                { currentTime.minutesDecades }
+                            </span>
+                            <span className="digitalwatch__LCDdisplay-middle-part_minutes_units">
+                                { currentTime.minutesUnits }
+                            </span>
+                            <span className="digitalwatch__LCDdisplay-middle-part_seconds_decades">
+                                { currentTime.secondsDecades }
+                            </span>
+                            <span className="digitalwatch__LCDdisplay-middle-part_seconds_units">
+                                { currentTime.secondsUnits }
+                            </span>
+                        </div>
+                        <div className="digitalwatch__LCDdisplay-bottom-part_wrapper">
+                            <span className="digitalwatch__LCDdisplay-bottom-part_UTC">UTC</span>
+                            <span className="digitalwatch__LCDdisplay-bottom-part_prefixUTC">
+                                { currentTime.signUTC }
+                            </span>
+                            <span className="digitalwatch__LCDdisplay-bottom-part_valueUTC">
+                                { currentTime.valueUTC }
+                            </span>
+                            <span className="digitalwatch__LCDdisplay-bottom-part_colon">:</span>
+                            <span className="digitalwatch__LCDdisplay-bottom-part_nullnull">00</span>
+                            <span className="digitalwatch__LCDdisplay-bottom-part_city">
+                                { currentTime.city }
+                            </span>
+                        </div>
+                    </div>;
 
     let dropDownListOfCities = < DropdownListOfCities
                                     onSelectCity={ changeCity }
