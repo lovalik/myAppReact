@@ -7,7 +7,6 @@
     animation-iteration-count: 4;
 }
 @keyframes animation-when-user-not-set-value_for-digits {
-
     0% {
         color:red;
     }
@@ -17,10 +16,8 @@
     100% {
         color:red;
     }
-
 }
 @-webkit-keyframes animation-when-user-not-set-value_for-digits {
-
     0% {
         color:red;
     }
@@ -30,10 +27,8 @@
     100% {
         color:red;
     }
-
 }
 @-moz-keyframes animation-when-user-not-set-value_for-digits {
-
     0% {
         color:red;
     }
@@ -43,7 +38,6 @@
     100% {
         color:red;
     }
-
 }
 
     /* FOR BUTTONS */
@@ -118,7 +112,6 @@
     animation-iteration-count: 3;
 }
 @keyframes animation-when-user-not-set-value_for-title {
-    
     0% {
         font-size: 24px;
         font-weight: bold;
@@ -138,10 +131,8 @@
         font-weight: bold;
         color:red;
     }
-
 }
 @-webkit-keyframes animation-when-user-not-set-value_for-title {
-    
     0% {
         font-size: 24px;
         font-weight: bold;
@@ -161,10 +152,8 @@
         font-weight: bold;
         color:red;
     }
-
 }
 @-moz-keyframes animation-when-user-not-set-value_for-title {
-    
     0% {
         font-size: 24px;
         font-weight: bold;
@@ -184,9 +173,7 @@
         font-weight: bold;
         color:red;
     }
-
 }
-
 
 /* ANIMATION EXECUTES WHEN TIME IS OUT */
 .timer__animation-when-time-is-out-for-digits {
@@ -195,7 +182,6 @@
     animation-iteration-count: 60;
 }
 @keyframes animation-when-time-is-out-for-digits {
-
     0% {
         color:red;
     }
@@ -211,10 +197,8 @@
     100% {
         color:red;
     }
-
 }
 @-webkit-keyframes animation-when-time-is-out-for-digits {
-
     0% {
         color:red;
     }
@@ -230,10 +214,8 @@
     100% {
         color:red;
     }
-
 }
 @-moz-keyframes animation-when-time-is-out-for-digits {
-
     0% {
         color:red;
     }
@@ -249,7 +231,6 @@
     100% {
         color:red;
     }
-
 }
 .timer__animation-when-time-is-out-for-title {
     animation-name: animation-when-time-is-out-for-title;
@@ -257,7 +238,6 @@
     animation-iteration-count: 60;
 }
 @keyframes animation-when-time-is-out-for-title {
-
     0% {
         font-size: 24px;
         font-weight: bold;
@@ -277,7 +257,6 @@
         font-weight: bold;
         color:red;
     }
-
 }
 @-moz-keyframes animation-when-time-is-out-for-title {
     0% {
@@ -299,7 +278,6 @@
         font-weight: bold;
         color:red;
     }
-
 }
 @-webkit-keyframes animation-when-time-is-out-for-title {
     0% {

@@ -1,36 +1,36 @@
 @media screen and (min-width: 1200px)  {
-    .application__toolbar_wrapper {
+    .toolbar_wrapper {
         text-align: center;
     }
-    .application__wrapper-for-secondary-buttons-right-side{
+    .toolbar__wrapper-for-secondary-buttons-right-side{
         float: right;
     }
-    .application__wrapper-for-secondary-buttons-left-side{
+    .toolbar__wrapper-for-secondary-buttons-left-side{
         float: left;
     }
-    .application__wrapper-for-secondary-buttons-left-side,
-    .application__wrapper-for-secondary-buttons-right-side{
+    .toolbar__wrapper-for-secondary-buttons-left-side,
+    .toolbar__wrapper-for-secondary-buttons-right-side{
        height: 80px;
     }
-    .application__button-add-digitalwatch,
-    .application__button-add-stopwatch,
-    .application__button-add-timer{
+    .toolbar__button-add-digitalwatch,
+    .toolbar__button-add-stopwatch,
+    .toolbar__button-add-timer{
         height: 48px;
     }
 }
 @media screen and (max-width: 1200px)  {
-    .application__toolbar_wrapper {
+    .toolbar_wrapper {
         text-align: left;
     }
-    .application__wrapper-for-all-add-buttons{
+    .toolbar__wrapper-for-all-add-buttons{
         width: 640px;
         justify-content: flex-start;
     }
-    .application__button-add-stopwatch_wrapper{
+    .toolbar__button-add-stopwatch_wrapper{
         position: relative;
         top: 29px;
     }
-    .application__wrapper-for-secondary-buttons-left-side{
+    .toolbar__wrapper-for-secondary-buttons-left-side{
         position: absolute;
         left: 640px;
         bottom: 0;
@@ -38,7 +38,7 @@
     }
 }
 @media screen and (min-width: 701px) and (max-width: 1200px) {
-    .application__wrapper-for-secondary-buttons-right-side{
+    .toolbar__wrapper-for-secondary-buttons-right-side{
         position: absolute;
         right: 0;
         bottom: 0;
@@ -46,7 +46,7 @@
     }
 }
 @media screen and (max-width: 700px) {
-    .application__wrapper-for-secondary-buttons-right-side{
+    .toolbar__wrapper-for-secondary-buttons-right-side{
         position: absolute;
         left: 545px;
         bottom: 0;
@@ -54,74 +54,74 @@
     }
 }
 @media screen and (min-width: 621px) {
-    .application__button-add-digitalwatch_wrapper,
-    .application__button-add-stopwatch_wrapper,
-    .application__button-add-timer_wrapper{
+    .toolbar__button-add-digitalwatch_wrapper,
+    .toolbar__button-add-stopwatch_wrapper,
+    .toolbar__button-add-timer_wrapper{
         height: 65px;
     }
-    .application__button-add-digitalwatch,
-    .application__button-add-stopwatch,
-    .application__button-add-timer{
+    .toolbar__button-add-digitalwatch,
+    .toolbar__button-add-stopwatch,
+    .toolbar__button-add-timer{
         height: 48px;
     }
 }
 @media screen and (min-width: 621px) and (max-width: 900px)  {
-    .application__wrapper-for-secondary-buttons-left-side{
+    .toolbar__wrapper-for-secondary-buttons-left-side{
         left: 305px;
         height: 50%;
     }
-    .application__button-add-stopwatch_wrapper{
+    .toolbar__button-add-stopwatch_wrapper{
         top: 0px;
     }
 }
 @media screen and (max-width: 620px){
-    .application__toolbar_wrapper {
+    .toolbar_wrapper {
         height: 120px;
     }
-    .application__wrapper-for-all-add-buttons{
+    .toolbar__wrapper-for-all-add-buttons{
         height: 100%;
         width: 280px;
         justify-content: center;
     }
-    .application__button-add-digitalwatch_wrapper,
-    .application__button-add-stopwatch_wrapper,
-    .application__button-add-timer_wrapper{
+    .toolbar__button-add-digitalwatch_wrapper,
+    .toolbar__button-add-stopwatch_wrapper,
+    .toolbar__button-add-timer_wrapper{
         width: 280px;
         height: 33.3%;
     }
-    .application__button-add-digitalwatch,
-    .application__button-add-stopwatch,
-    .application__button-add-timer{
+    .toolbar__button-add-digitalwatch,
+    .toolbar__button-add-stopwatch,
+    .toolbar__button-add-timer{
         font-size: 15px;
         height: 85%;
     }
-    .application__wrapper-for-secondary-buttons-left-side,
-    .application__wrapper-for-secondary-buttons-right-side{
+    .toolbar__wrapper-for-secondary-buttons-left-side,
+    .toolbar__wrapper-for-secondary-buttons-right-side{
         left: 270px;
         height: 50%;
     }
-    .application__wrapper-for-secondary-buttons-left-side{
+    .toolbar__wrapper-for-secondary-buttons-left-side{
         top: 0;
     }
-    .application__wrapper-for-secondary-buttons-right-side{
+    .toolbar__wrapper-for-secondary-buttons-right-side{
         bottom: 0;
     }
-    .application__button-add-stopwatch_wrapper{
+    .toolbar__button-add-stopwatch_wrapper{
         top: 0px;
     }
 }
 @media screen and (max-width: 430px){
-    .application__select-language-menu{
+    .toolbar__select-language-menu{
         width: 125px;
     }
 }
 @media screen and (max-width: 412px){
-    .myApplication {
+    .App {
         width: 100vw;
     }   
 }
 @media screen and (max-width: 412px){
-    .myApplication {
+    .App {
         width: 412px;
     }
 }

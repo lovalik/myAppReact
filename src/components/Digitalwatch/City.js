@@ -6,9 +6,9 @@ function City( {
             city,
             signUTC,
             valueUTC,
-            selectCity,
+            onSelectCity,
             currentCity,
-            hideList
+            onHideList
         } ){
 
     const[ rowBackgroundColor, setRowBackgroundColor ] =  useState( "" );
@@ -25,17 +25,17 @@ function City( {
     }
 
     function changeCity(){
-        selectCity( { city, signUTC, valueUTC } );
-        hideList();
+        onSelectCity( { city, signUTC, valueUTC } );
+        onHideList();
     }
     function highlightRow(){
-        setRowBackgroundColor( () => "black" );
-        setRowTextColor( () => "white" )
+        setRowBackgroundColor( "black" );
+        setRowTextColor( "white" )
     }
 
     function unHighlightRow(){
-        setRowBackgroundColor( () => "" );
-        setRowTextColor( () => "" )
+        setRowBackgroundColor( "" );
+        setRowTextColor( "" )
     }
 
     return <tr onClick={ changeCity } onMouseOver={ highlightRow } onMouseOut={unHighlightRow} style={ rowStyle }>
@@ -43,7 +43,7 @@ function City( {
                 <td className="digitalwatch__signUTC">{ signUTC }</td>
                 <td className="digitalwatch__valueUTC">{ valueUTC }</td>
                 <td className="digitalwatch__null-null">:00</td>
-                <td className="digitalwatch__city">{ dictionary[ language ][ "time zone UTC " + `${signUTC}${valueUTC}` + ":00" ][ city ] }</td>
+                <td className="digitalwatch__city">{ dictionary[ language ][ `time zone UTC ${ signUTC }${ valueUTC }:00` ][ city ] }</td>
             </tr>
 }
 

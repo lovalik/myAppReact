@@ -101,6 +101,7 @@ function convertTimeUnderUTC12( signUTC, valueUTC ) {
 
 function getDayDateMonthForCurrentCity( signUTC, valueUTC, language ) {
 
+    const dictIonary = dictionary[ language ];
     const time = current_UTC_Time();
 
     let currentHoursForSelectedCity;
@@ -156,16 +157,16 @@ function getDayDateMonthForCurrentCity( signUTC, valueUTC, language ) {
         currentMonthForSelectedCity = 11;
     }
 
-    currentDayForSelectedCity = convertIndexDayOfWeekToWord( currentDayForSelectedCity, language );
-    currentMonthForSelectedCity = convertIndexMonthToWord( currentMonthForSelectedCity, language );
+    currentDayForSelectedCity = convertIndexDayOfWeekToWord( currentDayForSelectedCity );
+    currentMonthForSelectedCity = convertIndexMonthToWord( currentMonthForSelectedCity );
     
-    function convertIndexDayOfWeekToWord( index, language ) {
-        let day = dictionary[ language ][ 'day of week' ][ index ];
+    function convertIndexDayOfWeekToWord( index ) {
+        let day = dictIonary[ 'day of week' ][ index ];
         return day;
     }
 
-    function convertIndexMonthToWord( index, language ) {
-        let month = dictionary[ language ][ 'month' ][ index ];
+    function convertIndexMonthToWord( index ) {
+        let month = dictIonary[ 'month' ][ index ];
         return month;
     }
 
@@ -186,9 +187,10 @@ function convertDate( {
 
     let time;
     let prefix_AM_PM;
+    const dictIonary = dictionary[ language ];
 
-    const cityName = dictionary[ language ][ `time zone UTC ${ currentSignUTC }${ currentValueUTC }:00` ] [ currentCity ];
-    const litera = dictionary[ language ][ "time-format_letter" ];
+    const cityName = dictIonary[ `time zone UTC ${ currentSignUTC }${ currentValueUTC }:00` ] [ currentCity ];
+    const litera = dictIonary[ "time-format_letter" ];
 
     let currentDate = getDayDateMonthForCurrentCity( currentSignUTC, currentValueUTC, language );
 

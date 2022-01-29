@@ -7,7 +7,7 @@ function ControlButton( { title, position, handler } ) {
     useEffect( () => {
 
         let timeoutID = setTimeout( () => {
-            setClassNameButtonPart2( ( ) => `control-button_part2_${ position }` );
+            setClassNameButtonPart2( `control-button_part2_${ position }` );
         }, 300)
 
         return () => clearTimeout( timeoutID );
@@ -33,7 +33,7 @@ function ControlButton( { title, position, handler } ) {
     
     function eventHandler(){
         if( classNameButtonPart2 === `control-button_part2_${ position }` ){
-            setClassNameButtonPart2( () => `control-button_part2_${ position } animation-for-control-buttons` );
+            setClassNameButtonPart2( `control-button_part2_${ position } animation-for-control-buttons` );
             handler()
         } else {
             return

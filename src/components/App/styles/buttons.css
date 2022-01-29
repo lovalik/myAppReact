@@ -1,4 +1,4 @@
-.application__wrapper-for-all-add-buttons{
+.toolbar__wrapper-for-all-add-buttons{
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
@@ -6,29 +6,29 @@
     position: relative;
     min-height: 80px;
 }
-.application__button-add-digitalwatch_wrapper,
-.application__button-add-stopwatch_wrapper,
-.application__button-add-timer_wrapper{
+.toolbar__button-add-digitalwatch_wrapper,
+.toolbar__button-add-stopwatch_wrapper,
+.toolbar__button-add-timer_wrapper{
     position: relative;
     box-sizing: border-box;
     text-align: center;
     font-size: 0;
     width: 310px;
 }
-.application__button-add-digitalwatch_wrapper::before,
-.application__button-add-stopwatch_wrapper::before,
-.application__button-add-timer_wrapper::before{
+.toolbar__button-add-digitalwatch_wrapper::before,
+.toolbar__button-add-stopwatch_wrapper::before,
+.toolbar__button-add-timer_wrapper::before{
     display: inline-block;
     vertical-align: middle;
     height: 100%;
     content:"";
     font-size: 0;
 }
-.application__button-select-language,
-.application__button-add-digitalwatch,
-.application__button-add-stopwatch,
-.application__button-add-timer,
-.application__button-close-all-items{
+.toolbar__button-select-language,
+.toolbar__button-add-digitalwatch,
+.toolbar__button-add-stopwatch,
+.toolbar__button-add-timer,
+.toolbar__button-close-all-items{
     box-sizing: border-box;
     display: inline-block;
     position: relative;
@@ -43,73 +43,73 @@
     border-radius: 24px;
     -webkit-tap-highlight-color: transparent;
 }
-.application__button-select-language::before,
-.application__button-add-digitalwatch::before,
-.application__button-add-stopwatch::before,
-.application__button-add-timer::before,
-.application__button-close-all-items::before{
+.toolbar__button-select-language::before,
+.toolbar__button-add-digitalwatch::before,
+.toolbar__button-add-stopwatch::before,
+.toolbar__button-add-timer::before,
+.toolbar__button-close-all-items::before{
     display: inline-block;
     vertical-align: middle;
     height: 100%;
     content:"";
     font-size: 0;
 }
-.application__button-add-digitalwatch,
-.application__button-add-stopwatch,
-.application__button-add-timer{
+.toolbar__button-add-digitalwatch,
+.toolbar__button-add-stopwatch,
+.toolbar__button-add-timer{
     width: 95%;
     font-size: 18px;
 }
-.application__button-add-digitalwatch:active,
-.application__button-add-stopwatch:active,
-.application__button-add-timer:active{
+.toolbar__button-add-digitalwatch:active,
+.toolbar__button-add-stopwatch:active,
+.toolbar__button-add-timer:active{
     background-image: linear-gradient( to top, black, rgba(75, 75, 75, 0.7));
     top: 2px;
     left: -2px;
 }
-.application__button-close-all-items:active{
+.toolbar__button-close-all-items:active{
     top: 2px;
     left: -2px;
 }
-.application__button-text {
+.toolbar__button-text {
     box-sizing: border-box;
     display: inline-block;
     vertical-align: middle;
     text-indent: 0;
     color: rgb(185, 185, 185);
 }
-.application__button-text::before{
+.toolbar__button-text::before{
     display: inline-block;
     vertical-align: middle;
     height: 100%;
     content:"";
     font-size: 0;
 }
-.application__wrapper-for-secondary-buttons-left-side,
-.application__wrapper-for-secondary-buttons-right-side{
+.toolbar__wrapper-for-secondary-buttons-left-side,
+.toolbar__wrapper-for-secondary-buttons-right-side{
     box-sizing: border-box;
     padding: 0;
     text-align: left;
 }
-.application__wrapper-for-secondary-buttons-left-side{
+.toolbar__wrapper-for-secondary-buttons-left-side{
     text-align: left;
     min-width: 170px;
     z-index: 1000;
 }
-.application__wrapper-for-secondary-buttons-right-side{
+.toolbar__wrapper-for-secondary-buttons-right-side{
     min-width: 80px;
     text-align: center;
 }
-.application__wrapper-for-secondary-buttons-left-side::before,
-.application__wrapper-for-secondary-buttons-right-side::before{
+.toolbar__wrapper-for-secondary-buttons-left-side::before,
+.toolbar__wrapper-for-secondary-buttons-right-side::before{
     display: inline-block;
     vertical-align: middle;
     height: 100%;
     content:"";
     font-size: 0;
 }
-.application__button-close-all-items,
-.application__button-select-language{
+.toolbar__button-close-all-items,
+.toolbar__button-select-language{
     position: relative;
     box-sizing: border-box;
     vertical-align: middle;
@@ -122,8 +122,8 @@
     border: none;
     border-radius: 24px;
 }
-.application__button-close-all-items::before,
-.application__button-select-language::before{
+.toolbar__button-close-all-items::before,
+.toolbar__button-select-language::before{
     display: inline-block;
     vertical-align: middle;
     height: 100%;
@@ -131,12 +131,12 @@
     font-size: 0;
 }
 /* BUTTON CLOSE ALL ITEMS */
-.application__button-close-all-items {
+.toolbar__button-close-all-items {
     display: none;
     border: solid 2px rgb(185, 185, 185);
     background-color: rgb(185, 185, 185);
 }
-.application__symbol-for-button-close-all-items{
+.toolbar__symbol-for-button-close-all-items{
     box-sizing: border-box;
     position: absolute;
     top: 0;
@@ -157,12 +157,12 @@
     background-size: contain;
 }
 /* BUTTON SELECT APP LANGUAGE */
-.application__button-select-language {
+.toolbar__button-select-language {
     display: inline-block;
     background-color: black;
     margin-left: 16px;
 }
-.application__language-menu {
+.toolbar__language-menu {
     box-sizing: border-box;
     display: none;
     position: absolute;
@@ -181,11 +181,11 @@
     border-radius: 24px;
     box-shadow: 0 0 1px 1px rgb(185, 185, 185);
 }
-.application__language-menu:hover{
+.toolbar__language-menu:hover{
     cursor: pointer;
 }
-.application__language-menu-row-for-english,
-.application__language-menu-row-for-russian{
+.toolbar__language-menu-row-for-english,
+.toolbar__language-menu-row-for-russian{
     box-sizing: border-box;
     position: absolute;
     right: 8%;
@@ -195,26 +195,26 @@
     font-size: 0;
     cursor: pointer;
 }
-.application__language-menu-row-for-english{
+.toolbar__language-menu-row-for-english{
     top: 0;
 }
-.application__language-menu-row-for-russian{
+.toolbar__language-menu-row-for-russian{
     bottom: 0;
 }
-.application__language-menu-row-for-english:hover,
-.application__language-menu-row-for-russian:hover{
+.toolbar__language-menu-row-for-english:hover,
+.toolbar__language-menu-row-for-russian:hover{
     color: red;
 }
-.application__language-menu-row-for-english::before,
-.application__language-menu-row-for-russian::before{
+.toolbar__language-menu-row-for-english::before,
+.toolbar__language-menu-row-for-russian::before{
     display: inline-block;
     vertical-align: middle;
     height: 100%;
     font-size: 0;
     content:"";
 }
-.application__language-menu-english_symbol,
-.application__language-menu-russian_symbol{
+.toolbar__language-menu-english_symbol,
+.toolbar__language-menu-russian_symbol{
     box-sizing: border-box;
     display: inline-block;
     margin: 0;
@@ -225,16 +225,16 @@
     text-align: left;
     font-size: 24px;
 }
-.application__language-menu-english_symbol::before,
-.application__language-menu-russian_symbol::before{
+.toolbar__language-menu-english_symbol::before,
+.toolbar__language-menu-russian_symbol::before{
     display: inline-block;
     vertical-align: middle;
     height: 100%;
     font-size: 0;
     content:"";
 }
-.application__language-menu-english_word,
-.application__language-menu-russian_word{
+.toolbar__language-menu-english_word,
+.toolbar__language-menu-russian_word{
     box-sizing: border-box;
     display: inline-block;
     padding: 0;
@@ -244,15 +244,15 @@
     font-size: 18px;
     vertical-align: middle;
 }
-.application__language-menu-english_word::before,
-.application__language-menu-russian_word::before{
+.toolbar__language-menu-english_word::before,
+.toolbar__language-menu-russian_word::before{
     display: inline-block;
     vertical-align: middle;
     height: 100%;
     font-size: 0;
     content:"";
 }
-.application__language-flag{
+.toolbar__language-flag{
     box-sizing: border-box;
     display: inline-block;
     height: 100%;

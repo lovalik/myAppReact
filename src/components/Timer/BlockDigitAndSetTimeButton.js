@@ -3,15 +3,15 @@ import engine from "./engine";
 
 function BlockDigitAndSetTimeButton( {
             value,
-            setValue,
-            setAppearanceTitleDecreaseValue,
-            setAppearanceTitleIncreaseValue,
+            onSetValue,
+            onSetAppearanceTitleDecreaseValue,
+            onSetAppearanceTitleIncreaseValue,
             digit,
             type,
-            animTimeIsOut,
-            animSetValue,
+            animationTimeIsOutExecution,
+            animationSetValueExecution,
             state,
-            setState
+            onSetState
         }){
 
     const methodsEngine = engine();
@@ -23,9 +23,9 @@ function BlockDigitAndSetTimeButton( {
         color: color
     }
 
-    if ( animTimeIsOut ){
+    if ( animationTimeIsOutExecution ){
         classNameDigit = "timer__animation-when-time-is-out-for-digits";
-    } else if ( animSetValue ){
+    } else if ( animationSetValueExecution ){
         classNameDigit = "timer__animation-when-user-not-set-value_for-digits";
     } else {
         classNameDigit = "";
@@ -35,7 +35,7 @@ function BlockDigitAndSetTimeButton( {
     let classNameButtonDecrease;
     let disabled;
 
-    if ( animSetValue ){
+    if ( animationSetValueExecution ){
         disabled = true;
         classNameButtonIncrease = `timer__button-increase-value-${ digit } timer__animation-when-user-not-set-value_for-buttons`;
         classNameButtonDecrease = `timer__button-decrease-value-${ digit } timer__animation-when-user-not-set-value_for-buttons`;
@@ -47,39 +47,39 @@ function BlockDigitAndSetTimeButton( {
     
     
     function unhidePopupTitleIncreaseValue(){
-        if( animSetValue || state === "finished" ){
-            setAppearanceTitleIncreaseValue( () => "none" );
-            setColor( () => "black" );
+        if( animationSetValueExecution || state === "finished" ){
+            onSetAppearanceTitleIncreaseValue( "none" );
+            setColor( "black" );
         } else {
-            setAppearanceTitleIncreaseValue( () => "block" );
-            setColor( () => "red" );
+            onSetAppearanceTitleIncreaseValue( "block" );
+            setColor( "red" );
         }
     }
 
     function unhidePopupTitleDecreaseValue(){
-        if( animSetValue || state === "finished" ){
-            setAppearanceTitleDecreaseValue( () => "none" );
-            setColor( () => "black" );
+        if( animationSetValueExecution || state === "finished" ){
+            onSetAppearanceTitleDecreaseValue( "none" );
+            setColor( "black" );
         } else {
-            setAppearanceTitleDecreaseValue( () => "block" );
-            setColor( () => "red" );
+            onSetAppearanceTitleDecreaseValue( "block" );
+            setColor( "red" );
         }
     }
 
     function hidePopupTitle(){
-        setAppearanceTitleIncreaseValue( () => "none" );
-        setAppearanceTitleDecreaseValue( () => "none" );
-        setColor( () => "black" );
+        onSetAppearanceTitleIncreaseValue( "none" );
+        onSetAppearanceTitleDecreaseValue( "none" );
+        setColor( "black" );
     }
 
     function increaseValue(){
         const howToChangeValue = "increase";
-        methodsEngine.changeDigitValue( { setState, howToChangeValue, digit, setValue, type } )
+        methodsEngine.changeDigitValue( { onSetState, howToChangeValue, digit, onSetValue, type } )
     }
 
     function decreaseValue(){
         const howToChangeValue = "decrease";
-        methodsEngine.changeDigitValue( { setState, howToChangeValue, digit, setValue, type } )
+        methodsEngine.changeDigitValue( { onSetState, howToChangeValue, digit, onSetValue, type } )
     }
 
     return <div className="timer__LCDdisplay_digit-with-button">

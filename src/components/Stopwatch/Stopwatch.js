@@ -1,38 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { ItemCase } from "../ItemCase";
-import LcdDisplay from "./LcdDisplay";
 import dictionary from "./dictionary";
-import convertMillisecToTimeValue from "./utilities"
+import convertMillisecToTimeValue from "./convertMillisecToTimeValue";
+import "./styles.css";
 
 function Stopwatch( {
         id,
         language,
-        closeItem,
-        status,
-        msecToDisplay,
-        setCreatedItems,
-        msecWhenStart,
-        pauseTime
+        onCloseItem,
+        parameters,
+        onSetCreatedItems
     } ){
 
-    const [ currentTime, setCurrentTime ] = useState( msecToDisplay );
-    const [ state, setState ] = useState( status );
-    const [ millsecWhenStart, setMillsecWhenStart ] = useState( msecWhenStart );
-    const [ pausedTime, setPausedTime ] = useState( pauseTime );
+    const dictIonary = dictionary[ language ];
+    let paramEters;
+
+    if ( parameters ){
+        paramEters = parameters
+    } else {
+        paramEters = {
+            ticking: false,
+            millisecToDisplay: 0,
+            millisecWhenStart: 0,
+            millisecWhenPaused: 0
+        }
+    }
+
+    const [ currentTime, setCurrentTime ] = useState( paramEters.millisecToDisplay );
+    const [ ticking, setTicking ] = useState( paramEters.ticking );
+    const [ millsecWhenStart, setMillsecWhenStart ] = useState( paramEters.millisecWhenStart );
+    const [ millsecWhenPaused, setMillsecWhenPaused ] = useState( paramEters.millisecWhenPaused );
 
     useEffect( () => {
 
-        setCreatedItems( ( previousState ) => {
+        onSetCreatedItems( ( previousState ) => {
             return previousState.map( ( item ) => {
                 if ( item.id === id ){
                     return { 
                         id: id,
                         tag: "stopwatch",
                         parameters: {
-                            status: state,
-                            msecWhenStart: millsecWhenStart,
-                            msecToDisplay: currentTime,
-                            pausedTime: pausedTime
+                            ticking: ticking,
+                            millisecWhenStart: millsecWhenStart,
+                            millisecToDisplay: currentTime,
+                            millisecWhenPaused: millsecWhenPaused
                         }
                     }
                 } else {
@@ -40,106 +51,100 @@ function Stopwatch( {
                 }
             } ) 
         } );
-    }, [ state, currentTime, millsecWhenStart, pausedTime ] )
+    }, [ ticking, currentTime, millsecWhenStart, millsecWhenPaused ] )
 
     useEffect( () => {
 
         let intervalID;
-        let delta;
 
-        if ( state === "started" ){
-
-            let msecCurrent = Date.now();
-
-            if( millsecWhenStart === 0 ){
-                delta = currentTime;
-            } else {
-                delta = msecCurrent - millsecWhenStart + pausedTime;
-            }
-    
+        if ( ticking ){
+                
             intervalID = setInterval( () => {
                 setCurrentTime( () => {
-                    return ( Date.now() - msecCurrent ) +  delta;
-
+                    return Date.now() - millsecWhenStart + millsecWhenPaused;
                 } );
             }, 50 )
 
-        } else if ( state === "paused" ){
-            setPausedTime( () => currentTime );
-            setMillsecWhenStart( () => 0 );
-        } else if ( state === "reseted" ){
-            setCurrentTime( () => 0 );
-            setMillsecWhenStart( () => 0 );
-            setPausedTime( () => 0 );
+        } else {
+            setCurrentTime( currentTime );
+            setMillsecWhenStart( 0 );
         }
 
         return () => clearInterval( intervalID );
 
-    }, [ state, millsecWhenStart, pausedTime, currentTime ] );
+    }, [ ticking, millsecWhenStart, currentTime, millsecWhenPaused ] );
 
     function start(){
-        if ( state === "started" ) {
-            return
+        if ( !ticking ) {
+            setMillsecWhenStart( Date.now() );
+            setTicking( true );
         } else {
-            setState( () => "started" );
-            setMillsecWhenStart( () => Date.now() );
+           return
         }
     }
 
     function pause(){
-        if ( state === "started" ){
-            setState( () => "paused" );
-        } else {
-            return
-        }
+        setTicking( false );
+        setMillsecWhenPaused( currentTime );
     }
 
     function reset(){
-        setState( () => "reseted" );
+        setTicking( false );
+        setCurrentTime( 0 );
+        setMillsecWhenPaused( 0 );
     }
 
-    function closeElem(){
-        closeItem( id );
+    function closeItem(){
+        onCloseItem( id );
     }
 
-    const lcdDisplay = < LcdDisplay time={ convertMillisecToTimeValue( currentTime ) }/>;
+    let time = convertMillisecToTimeValue( currentTime );
+
+    const lcdDisplay = <div className="stopwatch__LCDdisplay_wrapper">
+                            <span className="stopwatch__hours_decades">{ time.hoursDecade }</span>
+                            <span className="stopwatch__hours_units">{ time.hoursDecade }</span>
+                            <span className="stopwatch__colon">:</span>
+                            <span className="stopwatch__minutes_decades">{ time.minutesDecade }</span>
+                            <span className="stopwatch__minutes_units">{ time.minutesUnits }</span>
+                            <span className="stopwatch__colon">:</span>
+                            <span className="stopwatch__seconds_decades">{ time.secondsDecade }</span>
+                            <span className="stopwatch__seconds_units">{ time.secondsUnits }</span>
+                            <span className="stopwatch__milliseconds_block">
+                                <span className="stopwatch__milliseconds_title">{ dictIonary[ "title_msec-on-LCDDislay" ] }</span>
+                                <span className="stopwatch__milliseconds_decades">{ time.millsecondsDecade }</span>
+                                <span className="stopwatch__milliseconds_units">{ time.millsecondsUnits }</span>
+                            </span>
+                        </div>
 
     const buttonStart = {
-        title: dictionary[ language ][ "title_button-start" ],
+        title: dictIonary[ "title_button-start" ],
         position: "left-top",
         handler: start
     }
 
     const buttonPause = {
-        title: dictionary[ language ][ "title_button-pause" ],
+        title: dictIonary[ "title_button-pause" ],
         position: "left-bottom",
         handler: pause
     }
 
     const buttonReset = {
-        title: dictionary[ language ][ "title_button-reset" ],
+        title: dictIonary[ "title_button-reset" ],
         position: "right-bottom",
         handler: reset
     }
 
     const buttonClose = {
-        title: dictionary[ language ][ "title_button-close" ],
+        title: dictIonary[ "title_button-close" ],
         position: "right-top",
-        handler: closeElem
+        handler: closeItem
     }
 
-    const buttons = [
-        buttonStart,
-        buttonPause,
-        buttonReset,
-        buttonClose
-    ]
-
-    return <div className="application__wrapper-for-item">
+    return <div className="toolbar__wrapper-for-item">
                 < ItemCase
-                    buttons = { buttons }
-                    lcdDisplay = { lcdDisplay }
-                    title = { dictionary[ language ][ "main-title" ] }
+                    buttons = { [ buttonStart, buttonPause, buttonReset, buttonClose ] }
+                    lcdDisplay={ lcdDisplay }
+                    title = { dictIonary[ "main-title" ] }
                 />
             </div>
 }

@@ -9,26 +9,37 @@ import convertDate from "./utilities";
 function Digitalwatch( {
             id,
             language,
-            city,
-            timeFormat,
-            signUTC,
-            valueUTC,
-            closeItem,
-            setCreatedItems
+            parameters,
+            onCloseItem,
+            onSetCreatedItems
     } ){
 
-    const [ displayingListOfCities, setDisplayingListOfCities  ] = useState( false );
-    const [ time_Format, setTimeFormat  ] = useState( timeFormat );
-    const [ currentCity, setCurrentCity ] = useState( city );
-    const [ currentSignUTC, setSignUTC ] = useState( signUTC );
-    const [ currentValueUTC, setValueUTC ] = useState( valueUTC );
+    const dictIonary = dictionary[ language ];
+    let paramEters;
+
+    if ( parameters ){
+        paramEters = parameters;
+    } else {
+        paramEters = {
+            city: "Minsk",
+            valueUTC: 3,
+            signUTC: "+",
+            timeFormat: 24
+        }
+    }
+
+    const [ appearanceListOfCities, setAppearanceListOfCities  ] = useState( false );
+    const [ time_Format, setTimeFormat  ] = useState( paramEters.timeFormat );
+    const [ currentCity, setCurrentCity ] = useState( paramEters.city );
+    const [ currentSignUTC, setSignUTC ] = useState( paramEters.signUTC );
+    const [ currentValueUTC, setValueUTC ] = useState( paramEters.valueUTC );
     const [ currentTime, setCurrentTime  ] = useState( () => {
         let time = convertDate( { language, currentCity, currentSignUTC, currentValueUTC, time_Format } );
         return time;
     } );
 
     useEffect( () => {
-        setCreatedItems( ( previousState ) => {
+        onSetCreatedItems( ( previousState ) => {
             return previousState.map( ( item ) => {
                 if ( item.id === id ){
                     return { 
@@ -51,7 +62,7 @@ function Digitalwatch( {
     useEffect( () => {
         let intervalID = setInterval( () => {
             let time = convertDate( { language, currentCity, currentSignUTC, currentValueUTC, time_Format } );
-            setCurrentTime( () => time );
+            setCurrentTime( time );
         }, 50);
 
         return () => clearInterval( intervalID );
@@ -61,69 +72,63 @@ function Digitalwatch( {
 
     function changeTimeFormat(){
         if( time_Format === 24 ){
-            setTimeFormat( () => 12 ) 
+            setTimeFormat( 12 ) 
         } else if( time_Format === 12) {
-            setTimeFormat( () => 24 ) 
+            setTimeFormat( 24 ) 
         }
     }
     
     function changeCity( { city, signUTC, valueUTC } ){
-        setCurrentCity( () => city );
-        setSignUTC( () => signUTC );
-        setValueUTC( () => valueUTC );
+        setCurrentCity( city );
+        setSignUTC( signUTC );
+        setValueUTC( valueUTC );
     }
 
     function showOrHideListOfCities(){
-        if( displayingListOfCities ){
-            setDisplayingListOfCities( () => false )
+        if( appearanceListOfCities ){
+            setAppearanceListOfCities( false )
         } else {
-            setDisplayingListOfCities( () => true )
+            setAppearanceListOfCities( true )
         }
     }
 
-    function closeElem(){
-        closeItem( id );
+    function closeItem(){
+        onCloseItem( id );
     }
 
     let lcdDisplay = < LcdDisplay time={ currentTime } />;
 
     let dropDownListOfCities = < DropdownListOfCities
-                                    selectCity={ changeCity }
+                                    onSelectCity={ changeCity }
                                     currentCity = { currentCity }
-                                    displaying={ displayingListOfCities }
-                                    setDisplaying={ setDisplayingListOfCities }
+                                    appearance={ appearanceListOfCities }
+                                    onSetAppearance={ setAppearanceListOfCities }
                                     language={ language }
                                 />
 
     const buttonFormat = {
-        title: dictionary[ language ][ "title_button-format" ],
+        title: dictIonary[ "title_button-format" ],
         position: "left-top",
         handler: changeTimeFormat
     }
 
     const buttonCity = {
-        title: dictionary[ language ][ "title_button-city" ],
+        title: dictIonary[ "title_button-city" ],
         position: "left-bottom",
         handler: showOrHideListOfCities
     }
 
     const buttonClose = {
-        title: dictionary[ language ][ "title_button-close" ],
+        title: dictIonary[ "title_button-close" ],
         position: "right-top",
-        handler: closeElem
+        handler: closeItem
     }
 
-    const buttons = [
-        buttonFormat,
-        buttonCity,
-        buttonClose
-    ]
-
-    return  <div className="application__wrapper-for-item">
+    return  <div className="toolbar__wrapper-for-item">
                 < ItemCase
-                    buttons = { buttons }
+                    buttons = { [ buttonFormat, buttonCity, buttonClose ] }
                     lcdDisplay = { lcdDisplay }
-                    title = { dictionary[ language ][ "main-title" ] }
+                    title = { dictIonary[ "main-title" ] }
                     dropDownListOfCities = { dropDownListOfCities }
                 />
             </div>

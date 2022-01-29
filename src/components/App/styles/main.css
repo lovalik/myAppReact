@@ -1,17 +1,17 @@
 @import url("buttons.css");
 @import url( "responsive.css" );
 
-.Application {
+.toolbar {
     margin: 0;
     font-size: 0;
 }
-.Application button:focus{
+.toolbar button:focus{
     outline: transparent;
 }
-.Application button:hover{
+.toolbar button:hover{
     cursor: pointer;
 }
-.application__toolbar_wrapper {
+.toolbar_wrapper {
     position: fixed;
     z-index: 1000;
     font-family: "Days", "Arial", "Helvetica", sans-serif;
@@ -22,25 +22,25 @@
     border-bottom: solid 1px black;
     filter: drop-shadow(0 0 10px #000000);
 }
-.application__toolbar_wrapper *::selection{
+.toolbar_wrapper *::selection{
     background-color: transparent;
 }
-.application__toolbar_wrapper button:hover{
+.toolbar_wrapper button:hover{
     cursor: pointer;
 }
-.application__app-itembar_wrapper {
+.toolbar__app-itembar_wrapper {
     box-sizing: border-box;
     font-size: 0;
     text-align: center;
 }
-.application__section-for-items{
+.toolbar__section-for-items{
     display: inline-block;
     text-align: center;
     vertical-align: top;
     margin-top: 128px;
     margin-bottom: 48px;
 }
-.application__wrapper-for-item {
+.toolbar__wrapper-for-item {
     display: inline-block;
     box-sizing: border-box;
     vertical-align: middle;
@@ -51,7 +51,7 @@
     text-align: center;
     filter: drop-shadow(0 0 16px #000000);
 }
-.application__wrapper-for-item::before {
+.toolbar__wrapper-for-item::before {
     display: inline-block;
     height: 100%;
     vertical-align: middle;
