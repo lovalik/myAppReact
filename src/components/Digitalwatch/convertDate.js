@@ -1,6 +1,6 @@
 import dictionary from "./dictionary";
 
-function current_UTC_Time() {
+function currentUTCtime() {
 
     const currentTime = new Date();
 
@@ -25,7 +25,7 @@ function current_UTC_Time() {
 
 function convertTimeUnderUTC24( signUTC, valueUTC ) {
 
-    const time = current_UTC_Time();
+    const time = currentUTCtime();
 
     let hours = time.hours;
     let minutes = time.minutes;
@@ -33,13 +33,13 @@ function convertTimeUnderUTC24( signUTC, valueUTC ) {
         
     if ( signUTC === "-" ) {
         hours = hours - valueUTC;
-    } else if ( signUTC == "+" ) {
+    } else if ( signUTC === "+" ) {
         hours = hours + valueUTC;
     }
 
     if ( hours < 0 ) {
         hours = hours + 24;
-    } else if ( hours == 0 ) {
+    } else if ( hours === 0 ) {
         hours = 0;
     } else if ( hours >= 24 ) {
         hours = hours - 24;
@@ -54,7 +54,7 @@ function convertTimeUnderUTC24( signUTC, valueUTC ) {
 
 function convertTimeUnderUTC12( signUTC, valueUTC ) {
 
-    const time = current_UTC_Time();
+    const time = currentUTCtime();
 
     let prefix_AM_PM;
     let hours = time.hours;
@@ -63,18 +63,18 @@ function convertTimeUnderUTC12( signUTC, valueUTC ) {
 
     if ( signUTC === "-" ) {
         hours = hours - valueUTC;
-    } else if ( signUTC == "+" ) {
+    } else if ( signUTC === "+" ) {
         hours = hours + valueUTC;
     }
 
     if ( hours >=1 && hours < 12 ) {
         prefix_AM_PM = "AM";
-    } else if ( hours == 12 ) {
+    } else if ( hours === 12 ) {
         prefix_AM_PM = "PM";
     } else if ( hours >= 13 && hours < 24 ) {
         prefix_AM_PM = "PM";
         hours = hours - 12;
-    } else if ( hours == 0 || hours == 24) {
+    } else if ( hours === 0 || hours === 24) {
         prefix_AM_PM = "AM";
         hours = 12;
     } else if ( hours > ( -12 ) && hours < 0 ) {
@@ -102,7 +102,7 @@ function convertTimeUnderUTC12( signUTC, valueUTC ) {
 function getDayDateMonthForCurrentCity( signUTC, valueUTC, language ) {
 
     const dictIonary = dictionary[ language ];
-    const time = current_UTC_Time();
+    const time = currentUTCtime();
 
     let currentHoursForSelectedCity;
     let currentDayForSelectedCity;
@@ -116,9 +116,9 @@ function getDayDateMonthForCurrentCity( signUTC, valueUTC, language ) {
 
     let amountDaysInMonthForCurrentUTCtime = Number( new Date( currentUTCyear, ( currentUTCmonth + 1 ), 1 ).getUTCDate() );
 
-    if ( signUTC == "+" ) {
+    if ( signUTC === "+" ) {
         currentHoursForSelectedCity = currentUTChours + valueUTC;
-    } else if ( signUTC == "-" ) {
+    } else if ( signUTC === "-" ) {
         currentHoursForSelectedCity = currentUTChours - valueUTC;
     }
 
@@ -144,7 +144,7 @@ function getDayDateMonthForCurrentCity( signUTC, valueUTC, language ) {
     if ( currentDateForSelectedCity > amountDaysInMonthForCurrentUTCtime ) {
         currentDateForSelectedCity = 1;
         currentMonthForSelectedCity = currentUTCmonth + 1;
-    } else if ( currentDateForSelectedCity == 0 ) {
+    } else if ( currentDateForSelectedCity === 0 ) {
         currentDateForSelectedCity = Number( new Date( currentUTCyear, currentUTCmonth, 1 ).getUTCDate() );
         currentMonthForSelectedCity = currentUTCmonth - 1;
     } else {
@@ -189,7 +189,7 @@ function convertDate( {
     let prefix_AM_PM;
     const dictIonary = dictionary[ language ];
 
-    const cityName = dictIonary[ `time zone UTC ${ currentSignUTC }${ currentValueUTC }:00` ] [ currentCity ];
+    const cityName = dictIonary[ `time zone UTC ${ currentSignUTC }${ currentValueUTC }:00` ][ currentCity ];
     const litera = dictIonary[ "time-format_letter" ];
 
     let currentDate = getDayDateMonthForCurrentCity( currentSignUTC, currentValueUTC, language );

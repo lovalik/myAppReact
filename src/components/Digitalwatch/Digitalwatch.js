@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ItemCase } from "../ItemCase";
+import ItemCase from "../ItemCase";
 import DropdownListOfCities from "./DropdownListOfCities";
 import "./styles.css";
 import dictionary from "./dictionary";
@@ -10,7 +10,7 @@ function Digitalwatch( {
             language,
             parameters,
             onCloseItem,
-            onSetCreatedItems
+            onChangeAppState
     } ){
 
     const dictIonary = dictionary[ language ];
@@ -37,27 +37,17 @@ function Digitalwatch( {
         return time;
     } );
 
-    useEffect( () => {
-        onSetCreatedItems( ( previousState ) => {
-            return previousState.map( ( item ) => {
-                if ( item.id === id ){
-                    return { 
-                        id: id,
-                        tag: "digitalwatch",
-                        parameters: {
-                            city: currentCity,
-                            valueUTC: currentValueUTC,
-                            signUTC: currentSignUTC,
-                            timeFormat: time_Format
-                        }
-                    }
-                } else {
-                    return item;
-                }
-            } )
-        } );
-    }, [ currentCity, currentValueUTC, currentSignUTC, time_Format ] )
-
+    let digitalwatch = {
+        id: id,
+        tag: "digitalwatch",
+        parameters: {
+            city: currentCity,
+            valueUTC: currentValueUTC,
+            signUTC: currentSignUTC,
+            timeFormat: time_Format
+        }
+    }
+        
     useEffect( () => {
         let intervalID = setInterval( () => {
             let time = convertDate( { language, currentCity, currentSignUTC, currentValueUTC, time_Format } );
@@ -66,8 +56,11 @@ function Digitalwatch( {
 
         return () => clearInterval( intervalID );
 
-    }, [ currentCity, currentValueUTC, currentSignUTC, time_Format, currentTime ] )
+    }, [ currentCity, currentValueUTC, currentSignUTC, time_Format, language ] )
 
+    useEffect( () => {
+        onChangeAppState( digitalwatch )
+    }, [ currentCity, currentValueUTC, currentSignUTC, time_Format ] );
 
     function changeTimeFormat(){
         if( time_Format === 24 ){
@@ -95,6 +88,14 @@ function Digitalwatch( {
         onCloseItem( id );
     }
 
+    function hideList() {
+        setAppearanceListOfCities( false )
+    }
+
+    function unhideList() {
+        setAppearanceListOfCities( true )
+    }
+
     let lcdDisplay = <div className="digitalwatch__LCDdisplay_wrapper">
                         <div className="digitalwatch__LCDdisplay-top-part_wrapper">
                             <div className="digitalwatch__LCDdisplay-top-part-format12-24_wrapper">
@@ -111,7 +112,7 @@ function Digitalwatch( {
                                     { currentTime.date }</span>
                                 <span className="digitalwatch__LCDdisplay-top-part_dayofweek">
                                     { currentTime.dayOfWeek }
-                                    </span>
+                                </span>
                         </div> 
                         </div>
                         <div className="digitalwatch__LCDdisplay-middle-part_wrapper">
@@ -155,11 +156,13 @@ function Digitalwatch( {
                     </div>;
 
     let dropDownListOfCities = < DropdownListOfCities
-                                    onSelectCity={ changeCity }
+                                    onChangeCity={ changeCity }
                                     currentCity = { currentCity }
                                     appearance={ appearanceListOfCities }
                                     onSetAppearance={ setAppearanceListOfCities }
                                     language={ language }
+                                    onHideList={ hideList }
+                                    onUnhideList={ unhideList }
                                 />
 
     const buttonFormat = {

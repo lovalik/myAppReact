@@ -4,16 +4,20 @@ import dictionary from "./dictionary";
 
 function LcdDisplay( {
             language,
-            time,
-            onSetTime,
+            valueHoursDecades,
+            valueHoursUnits,
+            valueMinutesDecades,
+            valueMinutesUnits,
+            valueSecondsDecades,
+            valueSecondsUnits,
             animationTimeIsOutExecution,
             animationSetValueExecution,
             state,
-            onSetState,
             appearanceTitleIncreaseValue,
             appearanceTitleDecreaseValue,
-            onSetAppearanceTitleIncreaseValue,
-            onSetAppearanceTitleDecreaseValue
+            onChangeAppearanceTitleIncreaseValue,
+            onChangeAppearanceTitleDecreaseValue,
+            onChangeDigitValue
         } ){
 
     const stylePopupTitleIncreaseValue = {
@@ -61,78 +65,73 @@ function LcdDisplay( {
                     { dictIonary[ "popup-title_when-user-not-set-time" ]  }
                 </div>
                 < BlockDigitAndSetTimeButton
-                    value={ time.valueHoursDecades }
-                    onSetValue={ onSetTime.setValueHoursDecades }
-                    onSetAppearanceTitleIncreaseValue={ onSetAppearanceTitleIncreaseValue }
-                    onSetAppearanceTitleDecreaseValue={ onSetAppearanceTitleDecreaseValue }
+                    value={ valueHoursDecades }
+                    onChangeAppearanceTitleIncreaseValue={ onChangeAppearanceTitleIncreaseValue }
+                    onChangeAppearanceTitleDecreaseValue={ onChangeAppearanceTitleDecreaseValue }
                     digit={ "decades" }
-                    type={ "hours/decades" }
                     animationTimeIsOutExecution = { animationTimeIsOutExecution }
                     animationSetValueExecution = { animationSetValueExecution }
                     state = { state }
-                    onSetState = { onSetState }
+                    onIncreaseValue={ onChangeDigitValue.increaseValueHoursDecades }
+                    onDecreaseValue={ onChangeDigitValue.decreaseValueHoursDecades }
                 />
                 < BlockDigitAndSetTimeButton
-                    value={ time.valueHoursUnits }
-                    onSetValue={ onSetTime.setValueHoursUnits }
-                    onSetAppearanceTitleIncreaseValue={ onSetAppearanceTitleIncreaseValue }
-                    onSetAppearanceTitleDecreaseValue={ onSetAppearanceTitleDecreaseValue }
+                    value={ valueHoursUnits }
+                    onChangeAppearanceTitleIncreaseValue={ onChangeAppearanceTitleIncreaseValue }
+                    onChangeAppearanceTitleDecreaseValue={ onChangeAppearanceTitleDecreaseValue }
                     digit={ "units" }
-                    type={ "hours" }
                     animationTimeIsOutExecution = { animationTimeIsOutExecution }
                     animationSetValueExecution = { animationSetValueExecution }
                     state = { state }
-                    onSetState = { onSetState }
+                    onIncreaseValue={ onChangeDigitValue.increaseValueHoursUnits }
+                    onDecreaseValue={ onChangeDigitValue.decreaseValueHoursUnits }
                 />
                 <div className="timer__LCDdisplay_colon">:</div>
                 < BlockDigitAndSetTimeButton
-                    value={ time.valueMinutesDecades }
-                    onSetValue={ onSetTime.setValueMinutesDecades }
-                    onSetAppearanceTitleIncreaseValue={ onSetAppearanceTitleIncreaseValue }
-                    onSetAppearanceTitleDecreaseValue={ onSetAppearanceTitleDecreaseValue }
+                    value={ valueMinutesDecades }
+                    onChangeAppearanceTitleIncreaseValue={ onChangeAppearanceTitleIncreaseValue }
+                    onChangeAppearanceTitleDecreaseValue={ onChangeAppearanceTitleDecreaseValue }
                     digit={ "decades" }
+                    animationTimeIsOutExecution = { animationTimeIsOutExecution }
+                    animationSetValueExecution = { animationSetValueExecution }
+                    state = { state }
+                    onIncreaseValue={ onChangeDigitValue.increaseValueMinutesDecades }
+                    onDecreaseValue={ onChangeDigitValue.decreaseValueMinutesDecades }
+                />
+                < BlockDigitAndSetTimeButton
+                    value={ valueMinutesUnits }
+                    onChangeAppearanceTitleIncreaseValue={ onChangeAppearanceTitleIncreaseValue }
+                    onChangeAppearanceTitleDecreaseValue={ onChangeAppearanceTitleDecreaseValue }
+                    digit={ "units" }
                     type={ "minutes" }
                     animationTimeIsOutExecution = { animationTimeIsOutExecution }
                     animationSetValueExecution = { animationSetValueExecution }
                     state = { state }
-                    onSetState = { onSetState }
-                />
-                < BlockDigitAndSetTimeButton
-                    value={ time.valueMinutesUnits }
-                    onSetValue={ onSetTime.setValueMinutesUnits }
-                    onSetAppearanceTitleIncreaseValue={ onSetAppearanceTitleIncreaseValue }
-                    onSetAppearanceTitleDecreaseValue={ onSetAppearanceTitleDecreaseValue }
-                    digit={ "units" }
-                    type={ "minutes" }
-                    animationTimeIsOutExecution = { animationTimeIsOutExecution }
-                    animationSetValueExecution = { animationSetValueExecution }
-                    state = { state }
-                    onSetState = { onSetState }
+                    onIncreaseValue={ onChangeDigitValue.increaseValueMinutesUnits }
+                    onDecreaseValue={ onChangeDigitValue.decreaseValueMinutesUnits }
                 />
                 <div className="timer__LCDdisplay_colon">:</div>
                 < BlockDigitAndSetTimeButton
-                    value={ time.valueSecondsDecades }
-                    onSetValue={ onSetTime.setValueSecondsDecades }
-                    onSetAppearanceTitleIncreaseValue={ onSetAppearanceTitleIncreaseValue }
-                    onSetAppearanceTitleDecreaseValue={ onSetAppearanceTitleDecreaseValue }
+                    value={ valueSecondsDecades }
+                    onChangeAppearanceTitleIncreaseValue={ onChangeAppearanceTitleIncreaseValue }
+                    onChangeAppearanceTitleDecreaseValue={ onChangeAppearanceTitleDecreaseValue }
                     digit={ "decades" }
-                    type={ "seconds" }
                     animationTimeIsOutExecution = { animationTimeIsOutExecution }
                     animationSetValueExecution = { animationSetValueExecution }
                     state = { state }
-                    onSetState = { onSetState }
+                    onIncreaseValue={ onChangeDigitValue.increaseValueSecondsDecades }
+                    onDecreaseValue={ onChangeDigitValue.decreaseValueSecondsDecades }
                 />
                 < BlockDigitAndSetTimeButton
-                    value={ time.valueSecondsUnits }
-                    onSetValue={ onSetTime.setValueSecondsUnits }
-                    onSetAppearanceTitleIncreaseValue={ onSetAppearanceTitleIncreaseValue }
-                    onSetAppearanceTitleDecreaseValue={ onSetAppearanceTitleDecreaseValue }
+                    value={ valueSecondsUnits }
+                    onChangeAppearanceTitleIncreaseValue={ onChangeAppearanceTitleIncreaseValue }
+                    onChangeAppearanceTitleDecreaseValue={ onChangeAppearanceTitleDecreaseValue }
                     digit={ "units" }
-                    type={ "seconds" }
                     animationTimeIsOutExecution = { animationTimeIsOutExecution }
                     animationSetValueExecution = { animationSetValueExecution }
                     state = { state }
-                    onSetState = { onSetState }
+                    onIncreaseValue={ onChangeDigitValue.increaseValueSecondsUnits }
+                    onDecreaseValue={ onChangeDigitValue.decreaseValueSecondsUnits }
                 />
             </div>
 }

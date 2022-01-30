@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { ItemCase } from "../ItemCase";
+import ItemCase from "../ItemCase";
 import LcdDisplay from "./LcdDisplay";
 import dictionary from "./dictionary";
 import { convertSecondsToTimeValueForDigits, convertTimeFromScoreboardToSeconds } from "./utilities";
+import changeDigitValue from "./changeDigitValue";
 import "./styles.css";
 
 function Timer( {
@@ -10,7 +11,7 @@ function Timer( {
             language,
             onCloseItem,
             parameters,
-            onSetCreatedItems
+            onChangeAppState
         } ){
 
     const dictIonary = dictionary[ language ];
@@ -23,7 +24,7 @@ function Timer( {
             state: "reseted",
             secToDisplay: 0,
             timeBeginningCountdown: 0,
-            millisecWhenStart: 0,
+            millisecFromUnixWhenStart: 0,
             animationTimeIsOut: {
                 execute: false,
                 duration: 60000,
@@ -45,46 +46,48 @@ function Timer( {
     const [ valueSecondsDecades, setValueSecondsDecades ] = useState( convertedTime.secondsDecades );
     const [ valueSecondsUnits, setValueSecondsUnits ] = useState( convertedTime.secondsUnits );
 
-    const [ milsecWhenStart, setMilsecWhenStart ] = useState( paramEters.millisecWhenStart );
+    const [ millsecFromUnixWhenStart, setMillsecFromUnixWhenStart ] = useState( paramEters.millisecFromUnixWhenStart );
     const [ initialTimeCountdown, setInitialTimeCountdown ] = useState( paramEters.timeBeginningCountdown );
 
     const [ animationTimeIsOutExecution, setAnimationTimeIsOutExecution ] = useState( paramEters.animationTimeIsOut.execute );
-    const [ milsecWhenAnimTimeIsOutStart, setMilsecWhenAnimTimeIsOutStart ] = useState( paramEters.animationTimeIsOut[ "msecUNIX when animation start" ] );
+    const [ millisecFromUnixWhenAnimationStart, setMillisecFromUnixWhenAnimationStart ] = useState( paramEters.animationTimeIsOut[ "msecUNIX when animation start" ] );
     const [ animationTimeHasPassed, setAnimationTimeHasPassed ] = useState( paramEters.animationTimeIsOut.timeAnimationHasPassed );
 
     const [ animationSetValueExecution, setAnimationSetValueExecution ] = useState( false );
     const [ appearanceTitleIncreaseValue, setAppearanceTitleIncreaseValue ] = useState( "none" );
     const [ appearanceTitleDecreaseValue, setAppearanceTitleDecreaseValue ] = useState( "none" );
 
-    useEffect( () => {
-        onSetCreatedItems( ( previousState ) => {
-            return previousState.map( ( item ) => {
-                if ( item.id === id ){
-                    return {
-                        id: id,
-                        tag: "timer",
-                        parameters: {
-                            state: state,
-                            secToDisplay: time,
-                            timeBeginningCountdown: initialTimeCountdown,
-                            millisecWhenStart: milsecWhenStart,
-                            animationTimeIsOut: {
-                                execute: animationTimeIsOutExecution,
-                                duration: 60000,
-                                "msecUNIX when animation start": milsecWhenAnimTimeIsOutStart,
-                                timeAnimationHasPassed: animationTimeHasPassed
-                            }
-                        }
-                    }
-                } else {
-                    return item;
-                }
-            } );
-        } )
-    }, [ state, valueHoursDecades, valueHoursUnits, valueMinutesDecades, valueMinutesUnits, valueSecondsUnits, valueSecondsDecades, animationTimeIsOutExecution, animationTimeHasPassed, milsecWhenAnimTimeIsOutStart, initialTimeCountdown ] )
+    time = convertTimeFromScoreboardToSeconds( {
+        valueHoursDecades,
+        valueHoursUnits,
+        valueMinutesDecades,
+        valueMinutesUnits,
+        valueSecondsDecades,
+        valueSecondsUnits
+    } );
+
+    let timer = {
+        id: id,
+        tag: "timer",
+        parameters: {
+            state: state,
+            secToDisplay: time,
+            timeBeginningCountdown: initialTimeCountdown,
+            millisecFromUnixWhenStart: millsecFromUnixWhenStart,
+            animationTimeIsOut: {
+                execute: animationTimeIsOutExecution,
+                duration: 60000,
+                "msecUNIX when animation start": millisecFromUnixWhenAnimationStart,
+                timeAnimationHasPassed: animationTimeHasPassed
+            }
+        }
+    }
 
     useEffect( () => {
+        onChangeAppState( timer )
+    }, [ state, time, initialTimeCountdown, millsecFromUnixWhenStart, animationTimeIsOutExecution, millisecFromUnixWhenAnimationStart, animationTimeHasPassed ] );
 
+    useEffect( () => {
         let timeoutID;
         if ( animationSetValueExecution === true ){
             setAppearanceTitleIncreaseValue( "none" );
@@ -108,11 +111,11 @@ function Timer( {
             let msec = Date.now();
             let timeUnload;
 
-            if ( milsecWhenAnimTimeIsOutStart === 0 ){
-                setMilsecWhenAnimTimeIsOutStart( msec );
+            if ( millisecFromUnixWhenAnimationStart === 0 ){
+                setMillisecFromUnixWhenAnimationStart( msec );
             }
             
-            timeUnload = msec - milsecWhenAnimTimeIsOutStart;
+            timeUnload = msec - millisecFromUnixWhenAnimationStart;
 
             intervalID = setInterval( () => {
 
@@ -125,16 +128,14 @@ function Timer( {
                     setAnimationTimeHasPassed( 0 );
                     setAnimationTimeIsOutExecution( false );
                     setState( "reseted" );
-                    setMilsecWhenAnimTimeIsOutStart( 0 );
+                    setMillisecFromUnixWhenAnimationStart( 0 );
                 }
             }, 1000 )
         }
 
         return () => clearInterval( intervalID );
+    }, [ state, animationTimeHasPassed, millisecFromUnixWhenAnimationStart, initialTimeCountdown, appearanceTitleIncreaseValue ] );
 
-    }, [ state, animationTimeHasPassed, milsecWhenAnimTimeIsOutStart, initialTimeCountdown, appearanceTitleIncreaseValue ] );
-
-    
     useEffect( () => {
 
         let intervalID;
@@ -146,21 +147,25 @@ function Timer( {
                 setState( "reseted" );
                 return;
             } else {
-                let timeUnload;
-                let msecWhenStart = Date.now();
+                let msecBeforeTick = Date.now();
 
-                if ( milsecWhenStart === 0 ){
-                    setMilsecWhenStart( msecWhenStart );
+                if ( millsecFromUnixWhenStart === 0 ){
+                    setMillsecFromUnixWhenStart( msecBeforeTick );
                 }
                 
-                timeUnload = Math.floor( ( msecWhenStart - milsecWhenStart ) / 1000 );
+                console.log( `UNIX ${ millsecFromUnixWhenStart }`)
+
+
+                let timeHavePassed = msecBeforeTick - millsecFromUnixWhenStart;
+
+                console.log( `времени прошло ${ Math.floor( timeHavePassed/1000 ) }`)
 
                 intervalID = setInterval( () => {
 
-                    let delta = Math.floor( ( Date.now() - msecWhenStart ) / 1000 );
-                    let secToDisplay = initialTimeCountdown - delta - timeUnload; 
+                    let delta = Date.now() - msecBeforeTick;
+                    let secToDisplay = initialTimeCountdown - Math.floor( ( delta + timeHavePassed ) / 1000 ) ; 
 
-                    if ( secToDisplay > timeUnload ){
+                    if ( secToDisplay > 0 ){
                         let convertedTime = convertSecondsToTimeValueForDigits( secToDisplay );
 
                         setValueHoursDecades( convertedTime.hoursDecades );
@@ -171,27 +176,22 @@ function Timer( {
                         setValueSecondsUnits( convertedTime.secondsUnits );
                     } else {
                         setState( "finished" );
-
                         setValueHoursDecades( 0 );
                         setValueHoursUnits( 0 );
                         setValueMinutesDecades( 0 );
                         setValueMinutesUnits( 0 );
                         setValueSecondsDecades( 0 );
                         setValueSecondsUnits( 0 );
-
                         setInitialTimeCountdown( 0 );
-
                         setAnimationTimeIsOutExecution( true );
-                        setMilsecWhenAnimTimeIsOutStart( 0 );
-                        setMilsecWhenStart( 0 );
+                        setMillisecFromUnixWhenAnimationStart( 0 );
+                        setMillsecFromUnixWhenStart( 0 );
                     }
                 }, 50 )
             }
         }
-
         return () => clearInterval( intervalID );
-
-    }, [ state, milsecWhenStart, time, initialTimeCountdown ] );
+    }, [ state, millsecFromUnixWhenStart, time, initialTimeCountdown ] );
         
     useEffect( () => {
         if ( state === "reseted" ){
@@ -203,8 +203,8 @@ function Timer( {
             setValueSecondsUnits( 0 );
             setAnimationTimeIsOutExecution( false );
             setAnimationTimeHasPassed( 0 );
-            setMilsecWhenAnimTimeIsOutStart( 0 )
-            setMilsecWhenStart( 0 );
+            setMillisecFromUnixWhenAnimationStart( 0 )
+            setMillsecFromUnixWhenStart( 0 );
             setInitialTimeCountdown( 0 );
         }
     }, [ state ] );
@@ -213,31 +213,10 @@ function Timer( {
         if ( state === "paused" ){
             setAnimationTimeIsOutExecution( false );
             setAnimationTimeHasPassed( 0 );
-            setMilsecWhenAnimTimeIsOutStart( 0 );
-            setMilsecWhenStart( 0 );
-            setInitialTimeCountdown( 0 );
+            setMillisecFromUnixWhenAnimationStart( 0 );
+            setMillsecFromUnixWhenStart( 0 );
         }
     }, [ state ] );
-
-    const timeToDisplay = {
-        valueHoursDecades,
-        valueHoursUnits,
-        valueMinutesDecades,
-        valueMinutesUnits,
-        valueSecondsDecades,
-        valueSecondsUnits
-    }
-
-    time = convertTimeFromScoreboardToSeconds( timeToDisplay );
-
-    const setTimeToDisplay = {
-        setValueHoursDecades,
-        setValueHoursUnits,
-        setValueMinutesDecades,
-        setValueMinutesUnits,
-        setValueSecondsDecades,
-        setValueSecondsUnits,
-    }
 
     function start(){
         if ( state === "started" || animationSetValueExecution ){
@@ -253,7 +232,6 @@ function Timer( {
     }
 
     function reset(){
-        time = convertTimeFromScoreboardToSeconds( 0 );
         setState( "reseted" );
     }
 
@@ -261,18 +239,40 @@ function Timer( {
         onCloseItem( id );
     }
 
+    function changeAppearanceTitleIncreaseValue( value ){
+        setAppearanceTitleIncreaseValue( value );
+    }
+
+    function changeAppearanceTitleDecreaseValue( value ){
+        setAppearanceTitleIncreaseValue( value );
+    }
+
+    const changeValueDigit = changeDigitValue( {
+                                        setState,
+                                        setValueHoursDecades,
+                                        setValueHoursUnits,
+                                        setValueMinutesDecades,
+                                        setValueMinutesUnits,
+                                        setValueSecondsDecades,
+                                        setValueSecondsUnits
+                                    } );
+
     let lcdDisplay = < LcdDisplay
                         language={ language }
-                        time={ timeToDisplay }
-                        onSetTime={ setTimeToDisplay }
+                        valueHoursDecades={ valueHoursDecades }
+                        valueHoursUnits={ valueHoursUnits }
+                        valueMinutesDecades={ valueMinutesDecades }
+                        valueMinutesUnits={ valueMinutesUnits }
+                        valueSecondsDecades={ valueSecondsDecades }
+                        valueSecondsUnits={ valueSecondsUnits }
                         animationTimeIsOutExecution={ animationTimeIsOutExecution }
                         animationSetValueExecution={ animationSetValueExecution }
                         state = { state }
-                        onSetState = { setState }
                         appearanceTitleIncreaseValue={ appearanceTitleIncreaseValue }
                         appearanceTitleDecreaseValue={ appearanceTitleDecreaseValue }
-                        onSetAppearanceTitleIncreaseValue={ setAppearanceTitleIncreaseValue }
-                        onSetAppearanceTitleDecreaseValue={ setAppearanceTitleDecreaseValue }
+                        onChangeAppearanceTitleIncreaseValue={ changeAppearanceTitleIncreaseValue }
+                        onChangeAppearanceTitleDecreaseValue={ changeAppearanceTitleDecreaseValue }
+                        onChangeDigitValue={ changeValueDigit }
                     />;
 
     const buttonStart = {
@@ -301,9 +301,9 @@ function Timer( {
 
     return  <div className="toolbar__wrapper-for-item">
                 < ItemCase
-                    buttons = { [ buttonStart, buttonPause, buttonReset, buttonClose ] }
-                    lcdDisplay = { lcdDisplay }
-                    title = { dictIonary[ "main-title" ] }
+                    buttons={ [ buttonStart, buttonPause, buttonReset, buttonClose ] }
+                    lcdDisplay={ lcdDisplay }
+                    title={ dictIonary[ "main-title" ] }
                 />
             </div>
 }

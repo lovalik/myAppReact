@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ItemCase } from "../ItemCase";
+import ItemCase from "../ItemCase";
 import dictionary from "./dictionary";
 import convertMillisecToTimeValue from "./convertMillisecToTimeValue";
 import "./styles.css";
@@ -9,7 +9,7 @@ function Stopwatch( {
         language,
         onCloseItem,
         parameters,
-        onSetCreatedItems
+        onChangeAppState
     } ){
 
     const dictIonary = dictionary[ language ];
@@ -31,47 +31,37 @@ function Stopwatch( {
     const [ millsecWhenStart, setMillsecWhenStart ] = useState( paramEters.millisecWhenStart );
     const [ millsecWhenPaused, setMillsecWhenPaused ] = useState( paramEters.millisecWhenPaused );
 
-    useEffect( () => {
+    const stopwatch = {
+        id: id,
+        tag: "stopwatch",
+        parameters: {
+            ticking: ticking,
+            millisecWhenStart: millsecWhenStart,
+            millisecToDisplay: currentTime,
+            millisecWhenPaused: millsecWhenPaused
+        }
+    }
 
-        onSetCreatedItems( ( previousState ) => {
-            return previousState.map( ( item ) => {
-                if ( item.id === id ){
-                    return { 
-                        id: id,
-                        tag: "stopwatch",
-                        parameters: {
-                            ticking: ticking,
-                            millisecWhenStart: millsecWhenStart,
-                            millisecToDisplay: currentTime,
-                            millisecWhenPaused: millsecWhenPaused
-                        }
-                    }
-                } else {
-                    return item;
-                }
-            } ) 
-        } );
-    }, [ ticking, currentTime, millsecWhenStart, millsecWhenPaused ] )
+    useEffect( () => { 
+        onChangeAppState( stopwatch )
+    }, [ ticking, millsecWhenStart, currentTime, millsecWhenPaused ] );
 
     useEffect( () => {
 
         let intervalID;
 
         if ( ticking ){
-                
             intervalID = setInterval( () => {
                 setCurrentTime( () => {
                     return Date.now() - millsecWhenStart + millsecWhenPaused;
                 } );
             }, 50 )
-
         } else {
             setCurrentTime( currentTime );
             setMillsecWhenStart( 0 );
         }
 
         return () => clearInterval( intervalID );
-
     }, [ ticking, millsecWhenStart, currentTime, millsecWhenPaused ] );
 
     function start(){

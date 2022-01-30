@@ -3,7 +3,7 @@ import Toolbar from "./Toolbar";
 import Stopwatch from "../Stopwatch";
 import Timer from "../Timer";
 import Digitalwatch from "../Digitalwatch";
-
+// localStorage.clear()
 function App() {
 
     let language;
@@ -84,6 +84,18 @@ function App() {
         setCreatedItems( ( previousState ) => previousState.filter( ( item ) => item.id !== id ) );
     }
 
+    function changeAppState( element ) {
+        setCreatedItems( ( previousState ) => {
+            return previousState.map( ( item ) => {
+                if( item.id === element.id ){
+                    return element;
+                } else {
+                    return item;
+                }
+            } )
+        } );
+    }
+
     let itemsToDisplay = createdItems.map( function( item ){
 
         switch( item.tag ){
@@ -94,7 +106,7 @@ function App() {
                             language={ appLanguage }
                             onCloseItem={ closeItem }
                             parameters={ item.parameters }
-                            onSetCreatedItems={ setCreatedItems }
+                            onChangeAppState={ changeAppState }
                         />
             case "stopwatch":
                 return <Stopwatch
@@ -103,7 +115,7 @@ function App() {
                             language={ appLanguage }
                             onCloseItem={ closeItem }
                             parameters={ item.parameters }
-                            onSetCreatedItems={ setCreatedItems }
+                            onChangeAppState={ changeAppState }
                         />;
             case "timer":
                 return <Timer
@@ -112,7 +124,7 @@ function App() {
                             language={ appLanguage }
                             onCloseItem={ closeItem }
                             parameters={ item.parameters }
-                            onSetCreatedItems={ setCreatedItems }
+                            onChangeAppState={ changeAppState }
                         />;
           
         }

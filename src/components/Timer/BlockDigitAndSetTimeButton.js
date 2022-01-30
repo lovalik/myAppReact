@@ -1,20 +1,16 @@
 import React, { useState } from "react";
-import engine from "./engine";
 
 function BlockDigitAndSetTimeButton( {
             value,
-            onSetValue,
-            onSetAppearanceTitleDecreaseValue,
-            onSetAppearanceTitleIncreaseValue,
+            onChangeAppearanceTitleIncreaseValue,
+            onChangeAppearanceTitleDecreaseValue,
             digit,
-            type,
             animationTimeIsOutExecution,
             animationSetValueExecution,
             state,
-            onSetState
+            onIncreaseValue,
+            onDecreaseValue
         }){
-
-    const methodsEngine = engine();
 
     const [ color, setColor ] = useState( "black" );
 
@@ -48,38 +44,28 @@ function BlockDigitAndSetTimeButton( {
     
     function unhidePopupTitleIncreaseValue(){
         if( animationSetValueExecution || state === "finished" ){
-            onSetAppearanceTitleIncreaseValue( "none" );
+            onChangeAppearanceTitleIncreaseValue( "none" );
             setColor( "black" );
         } else {
-            onSetAppearanceTitleIncreaseValue( "block" );
+            onChangeAppearanceTitleDecreaseValue( "block" );
             setColor( "red" );
         }
     }
 
     function unhidePopupTitleDecreaseValue(){
         if( animationSetValueExecution || state === "finished" ){
-            onSetAppearanceTitleDecreaseValue( "none" );
+            onChangeAppearanceTitleIncreaseValue( "none" );
             setColor( "black" );
         } else {
-            onSetAppearanceTitleDecreaseValue( "block" );
+            onChangeAppearanceTitleDecreaseValue( "block" );
             setColor( "red" );
         }
     }
 
     function hidePopupTitle(){
-        onSetAppearanceTitleIncreaseValue( "none" );
-        onSetAppearanceTitleDecreaseValue( "none" );
+        onChangeAppearanceTitleIncreaseValue( "none" );
+        onChangeAppearanceTitleDecreaseValue( "none" );
         setColor( "black" );
-    }
-
-    function increaseValue(){
-        const howToChangeValue = "increase";
-        methodsEngine.changeDigitValue( { onSetState, howToChangeValue, digit, onSetValue, type } )
-    }
-
-    function decreaseValue(){
-        const howToChangeValue = "decrease";
-        methodsEngine.changeDigitValue( { onSetState, howToChangeValue, digit, onSetValue, type } )
     }
 
     return <div className="timer__LCDdisplay_digit-with-button">
@@ -89,7 +75,7 @@ function BlockDigitAndSetTimeButton( {
                 <div className={ `timer__button-increase-value_wrapper` } >
                     <button type="button"
                         disabled={ disabled }
-                        onClick={ increaseValue }
+                        onClick={ onIncreaseValue }
                         onMouseOver={ unhidePopupTitleIncreaseValue }
                         onMouseOut={ hidePopupTitle }
                         className={ classNameButtonIncrease }
@@ -98,7 +84,7 @@ function BlockDigitAndSetTimeButton( {
                 <div className={ `timer__button-decrease-value_wrapper` } >
                     <button type="button"
                         disabled={ disabled }
-                        onClick={ decreaseValue }
+                        onClick={ onDecreaseValue }
                         onMouseOver={ unhidePopupTitleDecreaseValue }
                         onMouseOut={ hidePopupTitle }
                         className={ classNameButtonDecrease }

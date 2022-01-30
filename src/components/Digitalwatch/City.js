@@ -6,7 +6,7 @@ function City( {
             city,
             signUTC,
             valueUTC,
-            onSelectCity,
+            onChangeCity,
             currentCity,
             onHideList
         } ){
@@ -25,7 +25,7 @@ function City( {
     }
 
     function changeCity(){
-        onSelectCity( { city, signUTC, valueUTC } );
+        onChangeCity( { city, signUTC, valueUTC } );
         onHideList();
     }
     function highlightRow(){

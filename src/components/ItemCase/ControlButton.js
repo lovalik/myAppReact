@@ -12,7 +12,7 @@ function ControlButton( { title, position, handler } ) {
 
         return () => clearTimeout( timeoutID );
 
-    }, [ classNameButtonPart2 ] );
+    }, [ classNameButtonPart2, position ] );
 
     const classNameControlButton = `block-control-button_${ position }`;
     const classNameForTitle = `title-for-control-button_${ position }`;
