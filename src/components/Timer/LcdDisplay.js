@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext} from "react";
 import BlockDigitAndSetTimeButton from "./BlockDigitAndSetTimeButton";
 import dictionary from "./dictionary";
+import languageContext from "../App/languageContext";
 
 function LcdDisplay( {
-            language,
             valueHoursDecades,
             valueHoursUnits,
             valueMinutesDecades,
@@ -20,6 +20,7 @@ function LcdDisplay( {
             onChangeDigitValue
         } ){
 
+    const [ language, setLanguge ] = useContext( languageContext );
     const stylePopupTitleIncreaseValue = {
         display: appearanceTitleIncreaseValue 
     };

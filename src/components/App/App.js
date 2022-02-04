@@ -3,6 +3,7 @@ import Toolbar from "./Toolbar";
 import Stopwatch from "../Stopwatch";
 import Timer from "../Timer";
 import Digitalwatch from "../Digitalwatch";
+import languageContext from "./languageContext";
 // localStorage.clear()
 function App() {
 
@@ -103,43 +104,39 @@ function App() {
                 return <Digitalwatch
                             key = { item.id }
                             id = { item.id }
-                            language={ appLanguage }
                             onCloseItem={ closeItem }
                             parameters={ item.parameters }
                             onChangeAppState={ changeAppState }
-                        />
+                        />;
             case "stopwatch":
-                return <Stopwatch
+                return  <Stopwatch
                             key={ item.id }
                             id={ item.id }
-                            language={ appLanguage }
                             onCloseItem={ closeItem }
                             parameters={ item.parameters }
                             onChangeAppState={ changeAppState }
                         />;
             case "timer":
-                return <Timer
-                            key={ item.id }
-                            id={ item.id }
-                            language={ appLanguage }
-                            onCloseItem={ closeItem }
-                            parameters={ item.parameters }
-                            onChangeAppState={ changeAppState }
-                        />;
-          
+                    return  <Timer
+                                key={ item.id }
+                                id={ item.id }
+                                onCloseItem={ closeItem }
+                                parameters={ item.parameters }
+                                onChangeAppState={ changeAppState }
+                            />;
         }
     } );
 
     return <div className="App">
-                <Toolbar 
-                    language = { appLanguage }
-                    onChangeLanguage = { changeLanguage }
-                    onAddDigitalwatch = { addDigitalwatch }
-                    onAddStopwatch = { addStopwatch }
-                    onAddTimer = { addTimer }
-                    onCloseAll = { closeAllItems }
-                    createdItems = { itemsToDisplay }
-                />
+                <languageContext.Provider value={ [ appLanguage, setAppLanguage ] }>
+                    <Toolbar 
+                        onAddDigitalwatch = { addDigitalwatch }
+                        onAddStopwatch = { addStopwatch }
+                        onAddTimer = { addTimer }
+                        onCloseAll = { closeAllItems }
+                        createdItems = { itemsToDisplay }
+                    />
+                </languageContext.Provider>
             </div>
 }
 

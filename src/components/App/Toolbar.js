@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import dictionary from "./dictionary";
 import rusflag from "./images/rusflag.png";
 import engflag from "./images/engflag.png";
-import "./styles/main.css"
+import "./styles/main.css";
+import languageContext from "./languageContext";
 
 function Toolbar( {
-            language,
-            onChangeLanguage,
             onAddDigitalwatch,
             onAddStopwatch,
             onAddTimer,
@@ -14,6 +13,7 @@ function Toolbar( {
             createdItems,
         } ){
 
+    const [ language, setLanguage ] = useContext( languageContext );       
     const dictIonary = dictionary[ language ];
     
     const [ languageMenuAppearance, setLanguageMenuAppearance  ] = useState( "none" )
@@ -65,7 +65,7 @@ function Toolbar( {
                             <div className="toolbar__language-flag" style={ styleFlag }/>
 
                             <div className="toolbar__language-menu" style={ styleLangugeMenu }>
-                                <div onClick={ () => onChangeLanguage( "eng" ) } className="toolbar__language-menu-row-for-english">
+                                <div onClick={ () => setLanguage( "eng" ) } className="toolbar__language-menu-row-for-english">
                                     <span className="toolbar__language-menu-english_word">
                                         { dictIonary[ "language menu" ].eng }
                                     </span>
@@ -74,7 +74,7 @@ function Toolbar( {
                                     </span>
                                 </div>
                                 
-                                <div onClick={ () => onChangeLanguage( "rus" ) } className="toolbar__language-menu-row-for-russian">
+                                <div onClick={ () => setLanguage( "rus" ) } className="toolbar__language-menu-row-for-russian">
                                     <span className="toolbar__language-menu-russian_word">
                                         { dictIonary[ "language menu" ].rus }
                                     </span>

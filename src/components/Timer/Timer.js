@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ItemCase from "../ItemCase";
 import LcdDisplay from "./LcdDisplay";
 import dictionary from "./dictionary";
 import { convertSecondsToTimeValueForDigits, convertTimeFromScoreboardToSeconds } from "./utilities";
 import changeDigitValue from "./changeDigitValue";
 import "./styles.css";
+import languageContext from "../App/languageContext";
 
 function Timer( {
             id,
-            language,
             onCloseItem,
             parameters,
             onChangeAppState
         } ){
 
-    const dictIonary = dictionary[ language ];
     let paramEters;
+    const [ language, setLanguage ] = useContext( languageContext );
+    const dictIonary = dictionary[ language ];
 
     if ( parameters ){
         paramEters = parameters
@@ -258,7 +259,6 @@ function Timer( {
                                     } );
 
     let lcdDisplay = < LcdDisplay
-                        language={ language }
                         valueHoursDecades={ valueHoursDecades }
                         valueHoursUnits={ valueHoursUnits }
                         valueMinutesDecades={ valueMinutesDecades }

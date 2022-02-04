@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ItemCase from "../ItemCase";
 import DropdownListOfCities from "./DropdownListOfCities";
 import "./styles.css";
 import dictionary from "./dictionary";
 import convertDate from "./convertDate";
+import languageContext from "../App/languageContext";
 
 function Digitalwatch( {
             id,
-            language,
             parameters,
             onCloseItem,
             onChangeAppState
-    } ){
+        } ){
 
-    const dictIonary = dictionary[ language ];
     let paramEters;
-
+    const [ language, setLanguage ] = useContext( languageContext );
+    const dictIonary = dictionary[ language ];
+    
     if ( parameters ){
         paramEters = parameters;
     } else {
@@ -160,7 +161,6 @@ function Digitalwatch( {
                                     currentCity = { currentCity }
                                     appearance={ appearanceListOfCities }
                                     onSetAppearance={ setAppearanceListOfCities }
-                                    language={ language }
                                     onHideList={ hideList }
                                     onUnhideList={ unhideList }
                                 />

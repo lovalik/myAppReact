@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ItemCase from "../ItemCase";
 import dictionary from "./dictionary";
 import convertMillisecToTimeValue from "./convertMillisecToTimeValue";
 import "./styles.css";
+import languageContext from "../App/languageContext";
 
 function Stopwatch( {
         id,
-        language,
         onCloseItem,
         parameters,
         onChangeAppState
     } ){
 
-    const dictIonary = dictionary[ language ];
     let paramEters;
+    const [ language, setLanguage ] = useContext( languageContext );
+    const dictIonary = dictionary[ language ];
 
     if ( parameters ){
         paramEters = parameters

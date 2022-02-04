@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import dictionary from "./dictionary";
+import languageContext from "../App/languageContext";
 
 function City( {
-            language,
             city,
             signUTC,
             valueUTC,
@@ -14,6 +14,7 @@ function City( {
     const[ rowBackgroundColor, setRowBackgroundColor ] =  useState( "" );
     const[ rowTextColor, setRowTextColor ] =  useState( "" );
 
+    const [ language, setLanguage ] = useContext( languageContext );
     let rowStyle = {};
     
     if ( currentCity === city) {
